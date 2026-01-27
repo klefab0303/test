@@ -1,0 +1,1388 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Elden Ring Boss-Checkliste</title>
+<style>
+  body { font-family: sans-serif; padding: 20px; background: #f8f8f8; }
+
+  .accordion {
+  background-color: #eee;
+  color: #333;
+  cursor: pointer;
+  padding: 12px 18px;
+  width: 100%;
+  text-align: left;
+  border: none;
+  outline: none;
+  font-size: 18px;
+  transition: background-color 0.3s;
+}
+
+.accordion:hover {
+  background-color: #ddd;
+}
+
+.panel {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+}
+
+
+  .region {
+    margin-bottom: 50px;
+  }
+
+  /* Container für mehrere Tabellen nebeneinander
+     -> Grid mit auto-fit/minmax sorgt dafür, dass bei breiterem Bildschirm
+        mehrere Tabellen (2–3+) nebeneinander angezeigt werden können */
+  .region-tables {
+    display: grid;
+    gap: 20px; /* Abstand zwischen Tabellen */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    align-items: start; /* Tabellen oben ausrichten */
+  }
+
+  .boss-table {
+    border-collapse: collapse;
+    width: 100%;      /* Nimmt die volle Breite der Grid-Zelle ein */
+    min-width: 0;     /* Wichtig, damit Grid-Zellen schrumpfen können */
+    margin-bottom: 20px;
+    background: #fff;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    overflow: hidden;
+  }
+
+  .boss-table th, .boss-table td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: left;
+    word-break: break-word;
+  }
+
+  .boss-table th {
+    background: #eee;
+  }
+
+  #search {
+    padding: 8px;
+    width: 100%;
+    margin-bottom: 20px;
+    font-size: 16px;
+  }
+
+  /* Optional: Feintuning für sehr breite Bildschirme */
+  @media (min-width: 1200px) {
+    .region-tables {
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    }
+  }
+
+  /* Optional: engeres Layout auf sehr kleinen Bildschirmen */
+  @media (max-width: 420px) {
+    .boss-table th, .boss-table td {
+      padding: 6px;
+      font-size: 14px;
+    }
+  }
+</style>
+
+</head>
+<body>
+
+<h1>Elden Ring Boss-Checkliste</h1>
+
+<input type="text" id="search" placeholder="Nach Boss oder Region filtern..." aria-label="Suche Boss oder Region">
+
+    <section class="region">
+      <button class="accordion">Limgrave</button>
+        <div class="panel">
+      <table class="boss-table">
+  <thead>
+    <tr>
+      <th>✔</th>
+      <th>#</th>
+      <th>Bossname</th>
+      <th>Kategorie</th>
+      <th>Fundort</th>
+      <th>Belohnung</th>
+      <th>Anmerkungen</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><input type="checkbox"></td>
+      <td>1</td>
+      <td>Soldat Godricks</td>
+      <td>Dungeonboss</td>
+      <td>Höhle des Wissens</td>
+      <td>Stärke (Geste)</td>
+      <td>Tutorial-Boss, optional</td>
+    </tr>
+    <tr>
+      <td><input type="checkbox"></td>
+      <td>2</td>
+      <td>Baumwächter</td>
+      <td>Feldboss</td>
+      <td>Limgrave (Süden)</td>
+      <td>Goldene Hellebarde (Waffe)</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><input type="checkbox"></td>
+      <td>3</td>
+      <td>Bestienmensch von Farum Azula</td>
+      <td>Dungeonboss</td>
+      <td>Hainhöhle</td>
+      <td>Flammendrachentalisman</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><input type="checkbox"></td>
+      <td>4</td>
+      <td>Wachhund des Erdenbaumbegräbnisses</td>
+      <td>Dungeonboss</td>
+      <td>Sturmfuß-Katakomben</td>
+      <td>Asche des Zauberadligen</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><input type="checkbox"></td>
+      <td>5</td>
+      <td>Fliegender Drache Agheel</td>
+      <td>Feldboss</td>
+      <td>Limgrave (Süden)</td>
+      <td>Drachenherz</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><input type="checkbox"></td>
+      <td>6</td>
+      <td>Patches</td>
+      <td>Dungeonboss</td>
+      <td>Trübflusshöhle</td>
+      <td>Patches (Händler)</td>
+      <td>verschont ihn</td>
+    </tr>
+    <tr>
+      <td><input type="checkbox"></td>
+      <td>7</td>
+      <td>Wächtergolem</td>
+      <td>Dungeonboss</td>
+      <td>Hochstraßen-Höhle</td>
+      <td>Blaue Tänzerintalisman</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><input type="checkbox"></td>
+      <td>8</td>
+      <td>Steingräbertroll</td>
+      <td>Dungeonboss</td>
+      <td>Tunnel von Limgrave</td>
+      <td>Medaillon des Brüllens (Talisman)</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><input type="checkbox"></td>
+      <td>9</td>
+      <td>Baumgeist mit Geschwüren</td>
+      <td>Dungeonboss</td>
+      <td>Grab eines Randvolkshelden</td>
+      <td>Goldene Saat, Asche des verbannten Ritters Oleg</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><input type="checkbox"></td>
+      <td>10</td>
+      <td>Halbmenschen-Herrscher</td>
+      <td>Dungeonboss</td>
+      <td>Küstenhöhle</td>
+      <td>Schneidereiwerkzeuge, Nähnadel</td>
+      <td>Bewacht Zugang zur ersten Kirche der Drachenkommunion</td>
+    </tr>
+    <tr>
+      <td><input type="checkbox"></td>
+      <td>11</td>
+      <td>Dunkelkavallerist</td>
+      <td>Feldboss</td>
+      <td>Limgrave (Osten)</td>
+      <td>Stoßhagel (Kriegsasche)</td>
+      <td>Erscheint nur nachts</td>
+    </tr>
+    <tr>
+      <td><input type="checkbox"></td>
+      <td>12</td>
+      <td>Wahnsinniger Kürbiskopf</td>
+      <td>Dungeonboss</td>
+      <td>Ruinen eines Wegpunktes</td>
+      <td>Sellen (Händlerin)</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><input type="checkbox"></td>
+      <td>13</td>
+      <td>Bluthundritter Darriwil</td>
+      <td>Siegelboss</td>
+      <td>Siegelgefängnis des Bluthundes</td>
+      <td>Bluthundreißzahn (Waffe)</td>
+      <td>Teil von Blaidds Questline</td>
+    </tr>
+    <tr>
+      <td><input type="checkbox"></td>
+      <td>14</td>
+      <td>Schmelztiegelritter</td>
+      <td>Siegelboss</td>
+      <td>Siegelgefängnis des Sturmhügels</td>
+      <td>Aspekt des Schmelztiegels: Schweif (Anrufung)</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><input type="checkbox"></td>
+      <td>15</td>
+      <td>Klangperlenjäger</td>
+      <td>Feldboss</td>
+      <td>Limgrave (Norden)</td>
+      <td>Klangperle des Knochenhändlers</td>
+      <td>Erscheint nur nachts</td>
+    </tr>
+    <tr>
+      <td><input type="checkbox"></td>
+      <td>16</td>
+      <td>Assassine der Schwarzen Klinge</td>
+      <td>Dungeonboss</td>
+      <td>Todberührte Katakomben</td>
+      <td>Assassinen-Purpurklinge (Talisman), Todeswurzel</td>
+      <td>Startet mit halbem Leben</td>
+    </tr>
+    <tr>
+      <td><input type="checkbox"></td>
+      <td>17</td>
+      <td>Grabhüterduellant</td>
+      <td>Dungeonboss</td>
+      <td>Trübflusskatakomben</td>
+      <td>Asche des verbannten Ritters Engvall</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><input type="checkbox"></td>
+      <td>18</td>
+      <td>Todesvogel</td>
+      <td>Feldboss</td>
+      <td>Limgrave (Norden)</td>
+      <td>Blau gefiedertes Astschwert (Talisman)</td>
+      <td>Erscheint nur nachts</td>
+    </tr>
+    <tr>
+      <td><input type="checkbox"></td>
+      <td>19</td>
+      <td>Tibiaseefahrer</td>
+      <td>Feldboss</td>
+      <td>Totenwasser-Dorf</td>
+      <td>Todeswurzel, Asche der Skelettmiliz</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><input type="checkbox"></td>
+      <td>20</td>
+      <td>Margit, das Grausame Mal</td>
+      <td>Hauptboss</td>
+      <td>Schloss Sturmschleier</td>
+      <td>Talismanbeutel</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><input type="checkbox"></td>
+      <td>21</td>
+      <td>Godrick, der Verpflanzte</td>
+      <td>Hauptboss</td>
+      <td>Schloss Sturmschleier</td>
+      <td>Godricks Große Rune, Echo des Verpflanzten</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><input type="checkbox"></td>
+      <td>22</td>
+      <td>Verpflanzter Spross</td>
+      <td>Dungeonboss</td>
+      <td>Kapelle der Erwartung</td>
+      <td>Ornamentales Schwert (Waffe), Goldenes Bestienschild (Waffe)</td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+        </div>
+    </section>
+    <section class="region">
+      <button class="accordion">Halbinsel der Tränen</button>
+        <div class="panel">
+  <table class="boss-table">
+  <thead>
+    <tr>
+      <th>✔</th>
+      <th>#</th>
+      <th>Bossname</th>
+      <th>Kategorie</th>
+      <th>Fundort</th>
+      <th>Belohnung</th>
+      <th>Anmerkungen</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><input type="checkbox"></td>
+      <td>1</td>
+      <td>Wachhund des Erdenbaumbegräbnisses</td>
+      <td>Dungeonboss</td>
+      <td>Katakomben des Pfählers</td>
+      <td>Halbmenschenasche</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><input type="checkbox"></td>
+      <td>2</td>
+      <td>Dunkelkavallerist</td>
+      <td>Feldboss</td>
+      <td>Halbinsel der Tränen (Süden)</td>
+      <td>Barrikadenschild (Kriegsasche), Flegel der Dunkelkavallerie (Waffe)</td>
+      <td>Erscheint nur nachts</td>
+    </tr>
+    <tr>
+      <td><input type="checkbox"></td>
+      <td>3</td>
+      <td>Löwenartiges Scheusal</td>
+      <td>Dungeonboss</td>
+      <td>Schloss Morne</td>
+      <td>Großschwert der Verpflanzung (Waffe)</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><input type="checkbox"></td>
+      <td>4</td>
+      <td>Todesvogel</td>
+      <td>Feldboss</td>
+      <td>Halbinsel der Tränen (Süden)</td>
+      <td>Opferpriesteraxt (Waffe)</td>
+      <td>Erscheint nur nachts</td>
+    </tr>
+    <tr>
+      <td><input type="checkbox"></td>
+      <td>5</td>
+      <td>Friedhofsschemen</td>
+      <td>Dungeonboss</td>
+      <td>Katakomben des Gräberwalls</td>
+      <td>Asche von Luthel, der Kopflosen</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><input type="checkbox"></td>
+      <td>6</td>
+      <td>Schuppenscheusal</td>
+      <td>Dungeonboss</td>
+      <td>Tunnel von Morne</td>
+      <td>Rostiger Anker (Waffe)</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><input type="checkbox"></td>
+      <td>7</td>
+      <td>Miranda, die faulige Blume</td>
+      <td>Dungeonboss</td>
+      <td>Höhle des Gräberwalls</td>
+      <td>Smaragdbernstein-Medaillon (Talisman)</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><input type="checkbox"></td>
+      <td>8</td>
+      <td>Runenbär</td>
+      <td>Dungeonboss</td>
+      <td>Erdschlundhöhle</td>
+      <td>Zauberdrachentalisman</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><input type="checkbox"></td>
+      <td>9</td>
+      <td>Avatar des Erdenbaums</td>
+      <td>Feldboss</td>
+      <td>Halbinsel der Tränen (Zentrum)</td>
+      <td>Opalene Blasenträne, Purpurrote Bruchkristallträne</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><input type="checkbox"></td>
+      <td>10</td>
+      <td>Uralter Held von Zamor</td>
+      <td>Siegelboss</td>
+      <td>Siegelgefängnis der Klagen</td>
+      <td>Radagons Narbensiegel (Talisman)</td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+        </div>
+    </section>
+    <section class="region">
+      <button class="accordion">Liurnia, dem Seenland</button>
+        <div class="panel">
+<table class="boss-table">
+  <thead>
+    <tr>
+      <th>✔</th>
+      <th>#</th>
+      <th>Bossname</th>
+      <th>Kategorie</th>
+      <th>Fundort</th>
+      <th>Belohnung</th>
+      <th>Anmerkungen</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td><input type="checkbox"></td><td>1</td><td>Reinfäule-Ritter</td><td>Dungeonboss</td><td>Stillwasserhöhle</td><td>Geflügelte Schwertinsignie (Talisman)</td><td></td></tr>
+    <tr><td><input type="checkbox"></td><td>2</td><td>Adan, Dieb des Feuers</td><td>Siegelboss</td><td>Siegelgefängnis der Niedertracht</td><td>Flamme des grausamen Gottes (Anrufung)</td><td></td></tr>
+    <tr><td><input type="checkbox"></td><td>3</td><td>Bluthundritter</td><td>Dungeonboss</td><td>Kristallhöhle am See</td><td>Himmelsbernstein-Medaillon (Talisman)</td><td></td></tr>
+    <tr><td><input type="checkbox"></td><td>4</td><td>Wachhund des Erdenbaumbegräbnisses</td><td>Dungeonboss</td><td>Katakomben am Klippenfuß</td><td>Asche des Kaiden-Söldners</td><td></td></tr>
+    <tr><td><input type="checkbox"></td><td>5</td><td>Todesvogel</td><td>Feldboss</td><td>Liurnia (Süden)</td><td>Rot gefiedertes Astschwert (Talisman)</td><td>Erscheint nur nachts</td></tr>
+    <tr><td><input type="checkbox"></td><td>6</td><td>Dunkelkavallerist</td><td>Feldboss</td><td>Liurnia (Osten)</td><td>Eisspeer (Kriegsasche)</td><td>Erscheint nur nachts</td></tr>
+    <tr><td><input type="checkbox"></td><td>7</td><td>Geisterruferschnecke</td><td>Dungeonboss</td><td>Katakomben am Wegesende</td><td>Asche des Schimmersteinzauberers</td><td>Unsichtbar, beschwört Feinde</td></tr>
+    <tr><td><input type="checkbox"></td><td>8</td><td>Assassine der Schwarzen Klinge</td><td>Dungeonboss</td><td>Katakomben der Schwarzen Klinge</td><td>Assassinen-Himmelsklinge, Schwarzer Messerabdruck</td><td>Versteckte Wand</td></tr>
+    <tr><td><input type="checkbox"></td><td>9</td><td>Friedhofsschemen</td><td>Dungeonboss</td><td>Katakomben der Schwarzen Klinge</td><td>Asche des Zauberzwillings, Todeswurzel</td><td></td></tr>
+    <tr><td><input type="checkbox"></td><td>10</td><td>Todesritenvogel</td><td>Feldboss</td><td>Liurnia (Zentrum)</td><td>Uralter Todesgroll (Zauber)</td><td>Erscheint nur nachts</td></tr>
+    <tr><td><input type="checkbox"></td><td>11</td><td>Schimmersteindrache Smarag</td><td>Feldboss</td><td>Liurnia (Zentrum)</td><td>Drachenherz</td><td></td></tr>
+    <tr><td><input type="checkbox"></td><td>12</td><td>Kristallianer (Stab + Speer)</td><td>Dungeonboss</td><td>Kristallhöhle der Akademie</td><td>Kristallexplosion, Terra Magica</td><td></td></tr>
+    <tr><td><input type="checkbox"></td><td>13</td><td>Maltöter</td><td>Feldboss</td><td>Dorf der Albinaurics</td><td>Knotentalisman des Schmelztiegels</td><td>Unter dem Plateau</td></tr>
+    <tr><td><input type="checkbox"></td><td>14</td><td>Königliches Gespenst</td><td>Dungeonboss</td><td>Königliche Ruinen</td><td>Eisnadel (Waffe)</td><td></td></tr>
+    <tr><td><input type="checkbox"></td><td>15</td><td>Königliche Ritterin Loretta</td><td>Dungeonboss</td><td>Anwesen von Caria</td><td>Lorettas Großbogen, Lorettas Schnitt</td><td>Bewacht Zugang zu Ranni</td></tr>
+    <tr><td><input type="checkbox"></td><td>16</td><td>Alabasterfürst</td><td>Siegelboss</td><td>Siegelgefängnis der Königsgräber</td><td>Meteorit (Zauber)</td><td></td></tr>
+    <tr><td><input type="checkbox"></td><td>17</td><td>Carianischer Ritter Bols</td><td>Siegelboss</td><td>Siegelgefängnis des Kuckucks</td><td>Großschwertphalanx (Zauber)</td><td></td></tr>
+    <tr><td><input type="checkbox"></td><td>18</td><td>Avatar des Erdenbaums</td><td>Feldboss</td><td>Liurnia (Westen)</td><td>Himmelblaue Kristallträne, Gesprungene Kristallträne</td><td></td></tr>
+    <tr><td><input type="checkbox"></td><td>19</td><td>Kristallianer</td><td>Dungeonboss</td><td>Kristalltunnel von Raya Lucaria</td><td>Klangperle 1 des Schmiedesteinschürfers</td><td></td></tr>
+    <tr><td><input type="checkbox"></td><td>20</td><td>Dunkelkavallerist</td><td>Feldboss</td><td>Liurnia (Norden)</td><td>Riesenjagd, Gleve der Dunkelkavallerie</td><td>Erscheint nur nachts</td></tr>
+    <tr><td><input type="checkbox"></td><td>21</td><td>Tibiaseefahrer</td><td>Feldboss</td><td>Liurnia (Osten)</td><td>Asche des Skelettbanditen, Todeswurzel</td><td></td></tr>
+    <tr><td><input type="checkbox"></td><td>22</td><td>Schimmersteindrache Adula</td><td>Feldboss</td><td>Mondlichtaltar</td><td>Drachenherz, Adulas Mondklinge</td><td>Begegnung vor Rannis Turm</td></tr>
+    <tr><td><input type="checkbox"></td><td>23</td><td>Alecto, Oberhaupt der Schwarzen Klingen</td><td>Siegelboss</td><td>Siegelgefängnis des Oberhaupts</td><td>Asche von Tiche</td><td></td></tr>
+    <tr><td><input type="checkbox"></td><td>24</td><td>Klangperlenjäger</td><td>Feldboss</td><td>Kirche der Gelübde</td><td>Klangperle des Fleischhändlers</td><td></td></tr>
+    <tr><td><input type="checkbox"></td><td>25</td><td>Avatar des Erdenbaums</td><td>Feldboss</td><td>Liurnia (Nordosten)</td><td>Gesprungene Magie-, Blitz- & Heiligschleierträne</td><td></td></tr>
+    <tr><td><input type="checkbox"></td><td>26</td><td>Magmalindwurm Makar</td><td>Dungeonboss</td><td>Klippenruinen</td><td>Magmalindwurm-Schuppenschwert, Drachenherz</td><td></td></tr>
+    <tr><td><input type="checkbox"></td><td>27</td><td>Roter Wolf von Radagon</td><td>Hauptboss</td><td>Akademie von Raya Lucaria</td><td>Speicherstein</td><td></td></tr>
+    <tr><td><input type="checkbox"></td><td>28</td><td>Rennala, Königin des Vollmonds</td><td>Hauptboss</td><td>Akademie von Raya Lucaria</td><td>Echo der Vollmondkönigin, Große Rune</td><td></td></tr>
+  </tbody>
+</table>
+        </div>
+    </section>
+    <section class="region">
+      <button class="accordion">Siofra</button>
+        <div class="panel">
+<table class="boss-table">
+  <thead>
+    <tr>
+      <th>✔</th>
+      <th>#</th>
+      <th>Bossname</th>
+      <th>Kategorie</th>
+      <th>Fundort</th>
+      <th>Belohnung</th>
+      <th>Anmerkungen</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><input type="checkbox"></td>
+      <td>1</td>
+      <td>Drachenblutsoldat</td>
+      <td>Feldboss</td>
+      <td>Siofra (Zentrum)</td>
+      <td>Drachenhellebarde</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><input type="checkbox"></td>
+      <td>2</td>
+      <td>Ahnengeist</td>
+      <td>Dungeonboss</td>
+      <td>Siofra (Osten)</td>
+      <td>Ahnenjüngerasche</td>
+      <td>Entzündet alle Fackeln</td>
+    </tr>
+    <tr>
+      <td><input type="checkbox"></td>
+      <td>3</td>
+      <td>Imitator-Träne</td>
+      <td>Dungeonboss</td>
+      <td>Nokron, die Ewige Stadt</td>
+      <td>Larventräne x2, Silbertränenmaske</td>
+      <td>Kopiert eure Ausrüstung beim Betreten des Kampfes</td>
+    </tr>
+    <tr>
+      <td><input type="checkbox"></td>
+      <td>4</td>
+      <td>Königlicher Ahnengeist</td>
+      <td>Dungeonboss</td>
+      <td>Nokron, die Ewige Stadt</td>
+      <td>Echo des königlichen Ahnen</td>
+      <td>Entzündet alle Fackeln in Nokron</td>
+    </tr>
+    <tr>
+      <td><input type="checkbox"></td>
+      <td>5</td>
+      <td>Tapferer Gargoyle</td>
+      <td>Dungeonboss</td>
+      <td>Nokron, die Ewige Stadt</td>
+      <td>Gargoyle-Großschwert, Gargoyle-Doppelklinge</td>
+      <td>Bewacht Zugang zu den Tiefen von Tiefwurz</td>
+    </tr>
+    <tr>
+      <td><input type="checkbox"></td>
+      <td>6</td>
+      <td>Mohg, Herr des Blutes</td>
+      <td>Hauptboss</td>
+      <td>Mohgwyn-Palast</td>
+      <td>Mohgs Große Rune, Echo des Blutfürsten</td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+        </div>
+    </section>
+    <section class="region">
+      <button class="accordion">Caelid</button>
+        <div class="panel">
+<table class="boss-table">
+  <thead>
+    <tr>
+      <th>✔</th>
+      <th>#</th>
+      <th>Bossname</th>
+      <th>Kategorie</th>
+      <th>Fundort</th>
+      <th>Belohnung</th>
+      <th>Anmerkungen</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td><input type="checkbox"></td><td>1</td><td>Magmalindwurm</td><td>Dungeonboss</td><td>Gaeltunnel</td><td>Drachenherz, Mondschleier</td><td></td></tr>
+    <tr><td><input type="checkbox"></td><td>2</td><td>Stinkender Avatar</td><td>Feldboss</td><td>Caelid (Nordwesten)</td><td>Grüne Bruchkristallträne, Gesprungene Flammenschleierträne</td><td></td></tr>
+    <tr><td><input type="checkbox"></td><td>3</td><td>Wachhunde des Erdenbaumbegräbnisses (Zepter & Schwert)</td><td>Dungeonboss</td><td>Niedere Erdenbaumkatakomben</td><td>Asche des wahnsinnigen Kürbiskopfes</td><td></td></tr>
+    <tr><td><input type="checkbox"></td><td>4</td><td>Wahnsinniger Kürbiskopf (Hammer & Flegel)</td><td>Dungeonboss</td><td>Ruinen von Caelem</td><td>Feuerspuckerschild</td><td></td></tr>
+    <tr><td><input type="checkbox"></td><td>5</td><td>Rasender Duellant</td><td>Dungeonboss</td><td>Kerkerhöhle</td><td>Stinkende Leichenasche</td><td></td></tr>
+    <tr><td><input type="checkbox"></td><td>6</td><td>Verfallender Ekzykes</td><td>Feldboss</td><td>Caelid (Südwesten)</td><td>Drachenherz</td><td></td></tr>
+    <tr><td><input type="checkbox"></td><td>7</td><td>Dunkelkavallerist</td><td>Feldboss</td><td>Caelid (Südwesten)</td><td>Giftiger Falter (Kriegsasche)</td><td>Erscheint nur nachts</td></tr>
+    <tr><td><input type="checkbox"></td><td>8</td><td>Friedhofsschemen</td><td>Dungeonboss</td><td>Katakomben von Caelid</td><td>Asche des Sprosses der Fäulnis</td><td></td></tr>
+    <tr><td><input type="checkbox"></td><td>9</td><td>Todesritenvogel</td><td>Feldboss</td><td>Caelid (Osten)</td><td>Schüreisen des Todes</td><td>Erscheint nur nachts</td></tr>
+    <tr><td><input type="checkbox"></td><td>10</td><td>Kommandant O'Neil</td><td>Feldboss</td><td>Caelid (Zentrum)</td><td>Kommandantenstandarte, Reine Goldnadel</td><td></td></tr>
+    <tr><td><input type="checkbox"></td><td>11</td><td>Sternenfallbestie</td><td>Dungeonboss</td><td>Kristalltunnel von Sellia</td><td>Dunkelschmiedestein (6), Schmiedestein (7), Klangperle</td><td></td></tr>
+    <tr><td><input type="checkbox"></td><td>12</td><td>Noxschwertkämpferin & Noxmönch</td><td>Dungeonboss</td><td>Sellia, Stadt der Zauberer</td><td>Fließendes Nox-Schwert</td><td>Rätsel von Sellia lösen</td></tr>
+    <tr><td><input type="checkbox"></td><td>13</td><td>Löwenscheusal & Schmelztiegelritter</td><td>Dungeonboss</td><td>Schloss Rotmähne</td><td>Trümmergroßschwert</td><td>Nur ohne Radahn</td></tr>
+    <tr><td><input type="checkbox"></td><td>14</td><td>Sternengeißel Radahn</td><td>Hauptboss</td><td>Schloss Rotmähne</td><td>Echo der Sternengeißel, Radahns Große Rune</td><td></td></tr>
+    <tr><td><input type="checkbox"></td><td>15</td><td>Reinfäule-Ritter (Speer & Sichel)</td><td>Dungeonboss</td><td>Verlassene Höhle</td><td>Goldskarabäus</td><td></td></tr>
+    <tr><td><input type="checkbox"></td><td>16</td><td>Kriegsmagier Hugues</td><td>Siegelboss</td><td>Siegelgefängnis von Sellia</td><td>Asche des Kriegsmagiers Hugues</td><td></td></tr>
+    <tr><td><input type="checkbox"></td><td>17</td><td>Apostel der Götterskalpe</td><td>Dungeonboss</td><td>Heiliger Turm von Caelid</td><td>Set der Götterskalpe, Großschwert der Gottestöterin</td><td></td></tr>
+    <tr><td><input type="checkbox"></td><td>18</td><td>Klangperlenjäger</td><td>Feldboss</td><td>Caelid (Norden)</td><td>Klangperle des Gravitationssteinhändlers</td><td></td></tr>
+    <tr><td><input type="checkbox"></td><td>19</td><td>Alter Drache Greyoll</td><td>Feldboss</td><td>Caelid (Osten)</td><td>Drachenherz x5</td><td>Kein Lebensbalken</td></tr>
+    <tr><td><input type="checkbox"></td><td>20</td><td>Stinkender Kristallianer</td><td>Dungeonboss</td><td>Sellias Versteck</td><td>Kristallschwall</td><td></td></tr>
+    <tr><td><input type="checkbox"></td><td>21</td><td>Stinkender Avatar</td><td>Feldboss</td><td>Caelid (Nordwesten)</td><td>Opalene verhärtete Träne, Gesprungene Steinstachelträne</td><td></td></tr>
+    <tr><td><input type="checkbox"></td><td>22</td><td>Bestienmensch von Farum Azula</td><td>Dungeonboss</td><td>Drachenhügelhöhle</td><td>Flammendrachentalisman +2</td><td></td></tr>
+    <tr><td><input type="checkbox"></td><td>23</td><td>Stinkender Baumgeist</td><td>Dungeonboss</td><td>Katakomben der Kriegsopfer</td><td>Asche des Rotmähnenritters Ogha, Goldene Saat</td><td></td></tr>
+    <tr><td><input type="checkbox"></td><td>24</td><td>Fliegender Drache Greyll</td><td>Feldboss</td><td>Caelid (Norden)</td><td>Drachenherz</td><td></td></tr>
+    <tr><td><input type="checkbox"></td><td>25</td><td>Dunkelkavallerist</td><td>Feldboss</td><td>Caelid (Norden)</td><td>Bluthundschritt (Kriegsasche)</td><td></td></tr>
+    <tr><td><input type="checkbox"></td><td>26</td><td>Verehrer der Schwarzen Klinge</td><td>Feldboss</td><td>Caelid (Norden)</td><td>Gargoyle-Doppelschwarzklinge, Gargoyle-Schwarzaxt</td><td></td></tr>
+  </tbody>
+</table>
+        </div>
+    </section>
+    <section class="region">
+      <button class="accordion">Altus Plateau</button>
+        <div class="panel">
+  <table class="boss-table">
+  <thead>
+    <tr>
+      <th>✔</th>
+      <th>#</th>
+      <th>Bossname</th>
+      <th>Kategorie</th>
+      <th>Fundort</th>
+      <th>Belohnung</th>
+      <th>Anmerkungen</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td><input type="checkbox"></td><td>1</td><td>Godefroy, der Verpflanzte</td><td>Siegelboss</td><td>Siegelgefängnis des goldenen Stammbaums</td><td>Godfreys Ikone</td><td></td></tr>
+    <tr><td><input type="checkbox"></td><td>2</td><td>Halbmenschliche Königin Gilika</td><td>Dungeonboss</td><td>Ruinen von Lux</td><td>Ritualschwerttalisman</td><td></td></tr>
+    <tr><td><input type="checkbox"></td><td>3</td><td>Dunkelkavallerist</td><td>Feldboss</td><td>Altus Plateau (Südwesten)</td><td>Geteilte Ordnung (Kriegsasche)</td><td>Erscheint nur nachts</td></tr>
+    <tr><td><input type="checkbox"></td><td>4</td><td>Sternenfallbestie</td><td>Feldboss</td><td>Altus Plateau (Südwesten)</td><td>Dunkelschmiedestein (5), Schmiedestein (6), Gravitationsstein</td><td></td></tr>
+    <tr><td><input type="checkbox"></td><td>5</td><td>Baumwächter</td><td>Feldboss</td><td>Altus Plateau (Südwesten)</td><td>Erdenbaum-Großschild</td><td></td></tr>
+    <tr><td><input type="checkbox"></td><td>6</td><td>Maltöter & Miranda, die faulige Blume</td><td>Dungeonboss</td><td>Parfümeursgrotte</td><td>Maltöter-Großbeil</td><td></td></tr>
+    <tr><td><input type="checkbox"></td><td>7</td><td>Onyxfürst</td><td>Dungeonboss</td><td>Versiegelter Tunnel</td><td>Onyxfürstengroßschwert</td><td>Bewacht Heiligen Turm von West-Altus</td></tr>
+    <tr><td><input type="checkbox"></td><td>8</td><td>Tapferer Gargoyle</td><td>Feldboss</td><td>Altus Plateau (Zentrum)</td><td>Gargoyle-Hellebarde</td><td>Verschwindet nach Maliketh</td></tr>
+    <tr><td><input type="checkbox"></td><td>9</td><td>Margit, das Grausame Mal</td><td>Feldboss</td><td>Altus Plateau (Zentrum)</td><td>Smaragdbernstein-Medaillon +1</td><td>Kein Lebensbalken</td></tr>
+    <tr><td><input type="checkbox"></td><td>10</td><td>Klangperlenjäger</td><td>Feldboss</td><td>Altus Plateau (Norden)</td><td>Klangperle des Medizinhändlers</td><td>Erscheint nur nachts</td></tr>
+    <tr><td><input type="checkbox"></td><td>11</td><td>Todesvogel</td><td>Feldboss</td><td>Altus Plateau (Norden)</td><td>Zwillingsvogel-Drachenschild</td><td>Erscheint nur nachts</td></tr>
+    <tr><td><input type="checkbox"></td><td>12</td><td>Grabhüterduellant</td><td>Dungeonboss</td><td>Seitengruft von Auriza</td><td>Asche der Kriegergefäße</td><td></td></tr>
+    <tr><td><input type="checkbox"></td><td>13</td><td>Schmelztiegelritter & Ordovis</td><td>Dungeonboss</td><td>Auriza-Grab</td><td>Ordovis’ Großschwert, Schmelztiegel-Set</td><td></td></tr>
+    <tr><td><input type="checkbox"></td><td>14</td><td>Apostel der Götterskalpe</td><td>Feldboss</td><td>Windmühlendorf</td><td>Götterskalphäuter, Schwarze Flamme</td><td>Teil von Millicents Quest</td></tr>
+    <tr><td><input type="checkbox"></td><td>15</td><td>Wurmgesicht</td><td>Feldboss</td><td>Altus Plateau (Nordwesten)</td><td>Purpurne Kristallträne, Verhärtete Träne</td><td></td></tr>
+    <tr><td><input type="checkbox"></td><td>16</td><td>Kristallianer (Speer & Ringklinge)</td><td>Dungeonboss</td><td>Altustunnel</td><td>Klangperle 2 des Dunkelsteinschürfers</td><td></td></tr>
+    <tr><td><input type="checkbox"></td><td>17</td><td>Blutadliger</td><td>Dungeonboss</td><td>Sturmblutruinen</td><td>Blutige Helix</td><td></td></tr>
+    <tr><td><input type="checkbox"></td><td>18</td><td>Uralter Drache Lansseax</td><td>Feldboss</td><td>Altus Plateau</td><td>Lansseax’ Gleve</td><td>Flieht bei 50 %</td></tr>
+    <tr><td><input type="checkbox"></td><td>19</td><td>Assassine der Schwarzen Klinge</td><td>Feldboss</td><td>Vor dem Grab des heiligen Helden</td><td>Schwarzes Messer</td><td>Kein Lebensbalken</td></tr>
+    <tr><td><input type="checkbox"></td><td>20</td><td>Uralter Held von Zamor</td><td>Dungeonboss</td><td>Grab des heiligen Helden</td><td>Asche des Drachenritters Kristoff</td><td></td></tr>
+    <tr><td><input type="checkbox"></td><td>21</td><td>Tibiaseefahrer</td><td>Feldboss</td><td>Altus Plateau (Westen)</td><td>Tibias Ruf, Todeswurzel</td><td></td></tr>
+    <tr><td><input type="checkbox"></td><td>22</td><td>Assassine der Schwarzen Klinge</td><td>Dungeonboss</td><td>Höhle des Weisen</td><td>Verhüllender Schleier</td><td>Unsichtbar – Fackel hilft</td></tr>
+    <tr><td><input type="checkbox"></td><td>23</td><td>Nekromant Garris</td><td>Dungeonboss</td><td>Höhle des Weisen</td><td>Köpfe der Familie</td><td></td></tr>
+    <tr><td><input type="checkbox"></td><td>24</td><td>Steingräbertroll</td><td>Dungeonboss</td><td>Alter Altustunnel</td><td>Großkeule</td><td></td></tr>
+    <tr><td><input type="checkbox"></td><td>25</td><td>Elemer von den Dornen</td><td>Dungeonboss</td><td>Schattenburg</td><td>Henkerschwert der Marais</td><td></td></tr>
+    <tr><td><input type="checkbox"></td><td>26</td><td>Drachenbaumwächter</td><td>Hauptboss</td><td>Altus Plateau (Westen)</td><td>Große Drachenkralle, Drachenklauenschild</td><td></td></tr>
+  </tbody>
+</table>
+        </div>
+    </section>
+    <section class="region">
+      <button class="accordion">Untergrund von Ainsel & Tiefen von Tiefwurz</button>
+        <div class="panel">
+<table class="boss-table">
+  <thead>
+    <tr>
+      <th>✔</th>
+      <th>#</th>
+      <th>Bossname</th>
+      <th>Kategorie</th>
+      <th>Fundort</th>
+      <th>Belohnung</th>
+      <th>Anmerkungen</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><input type="checkbox"></td>
+      <td>1</td>
+      <td>Drachenblutsoldat von Nokstella</td>
+      <td>Dungeonboss</td>
+      <td>Ende vom Fluss Ainsel</td>
+      <td>Eisiger Blitzspeer</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><input type="checkbox"></td>
+      <td>2</td>
+      <td>Drachenblutsoldat</td>
+      <td>Feldboss</td>
+      <td>Fäulnissee</td>
+      <td>Drachenschuppenklinge</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><input type="checkbox"></td>
+      <td>3</td>
+      <td>Astel, Ausgeburt des Abgrunds</td>
+      <td>Dungeonboss</td>
+      <td>Großer Kreuzgang</td>
+      <td>Echo der Ausgeburt</td>
+      <td>Teil von Rannis Quest, Zugang zum Mondlichtaltar</td>
+    </tr>
+    <tr>
+      <td><input type="checkbox"></td>
+      <td>4</td>
+      <td>Avatar des Erdenbaums</td>
+      <td>Feldboss</td>
+      <td>Tiefwurz (Südosten)</td>
+      <td>Stab des Avatars</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><input type="checkbox"></td>
+      <td>5</td>
+      <td>Schmelztiegelritter Siluria</td>
+      <td>Feldboss</td>
+      <td>Tiefwurz (Nordwesten)</td>
+      <td>Silurias Baum</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><input type="checkbox"></td>
+      <td>6</td>
+      <td>Fias Champions</td>
+      <td>Dungeonboss</td>
+      <td>Tiefwurz (Nordosten)</td>
+      <td>Fias Nebel</td>
+      <td>Pflichtkampf für Fortissax</td>
+    </tr>
+    <tr>
+      <td><input type="checkbox"></td>
+      <td>7</td>
+      <td>Lichdrache Fortissax</td>
+      <td>Hauptboss</td>
+      <td>Tiefwurz (Nordosten)</td>
+      <td>Echo des Lichdrachen</td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+        </div>
+    </section>
+    <section class="region">
+      <button class="accordion">Gelmir</button>
+        <div class="panel">
+      <table class="boss-table">
+  <thead>
+    <tr>
+      <th>✔</th>
+      <th>#</th>
+      <th>Bossname</th>
+      <th>Kategorie</th>
+      <th>Fundort</th>
+      <th>Belohnung</th>
+      <th>Anmerkungen</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><input type="checkbox"></td>
+      <td>1</td>
+      <td>Wachhund des Erdenbaumbegräbnisses</td>
+      <td>Dungeonboss</td>
+      <td>Katakomben von Wyndham</td>
+      <td>Klangperle 1 des Tallilienpflückers</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><input type="checkbox"></td>
+      <td>2</td>
+      <td>Heldenhafter Roter Wolf</td>
+      <td>Dungeonboss</td>
+      <td>Grab des Helden von Gelmir</td>
+      <td>Asche des Bluthundritters Floh, Todeswurzel</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><input type="checkbox"></td>
+      <td>3</td>
+      <td>Halbmenschliche Königin Maggie</td>
+      <td>Feldboss</td>
+      <td>Gelmir (Süden)</td>
+      <td>Speicherstein</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><input type="checkbox"></td>
+      <td>4</td>
+      <td>Entführerjungfer (Rad & Schwungsichel)</td>
+      <td>Dungeonboss</td>
+      <td>Haus Vulkan (Keller)</td>
+      <td>Girandole des Inquisitors</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><input type="checkbox"></td>
+      <td>5</td>
+      <td>Spross der Fäulnis</td>
+      <td>Dungeonboss</td>
+      <td>Donnerstromhöhle</td>
+      <td>Jubel des Sprosses der Fäulnis</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><input type="checkbox"></td>
+      <td>6</td>
+      <td>Baumgeist mit Geschwüren</td>
+      <td>Feldboss</td>
+      <td>Gelmir (Zentrum)</td>
+      <td>Verhärtete Bleiträne, Himmelblaue Geheimnisträne</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><input type="checkbox"></td>
+      <td>7</td>
+      <td>Halbmenschliche Königin Margot</td>
+      <td>Dungeonboss</td>
+      <td>Vulkanhöhle</td>
+      <td>Gefäßkanone</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><input type="checkbox"></td>
+      <td>8</td>
+      <td>Ausgewachsene Sternenfallbestie</td>
+      <td>Feldboss</td>
+      <td>Gelmir (Norden)</td>
+      <td>Dunkelschmiedestein (6), Schmiedestein (6), Sternenfallbestienkiefer</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><input type="checkbox"></td>
+      <td>9</td>
+      <td>Magmalindwurm</td>
+      <td>Feldboss</td>
+      <td>Gelmir (Westen)</td>
+      <td>Drachenherz</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><input type="checkbox"></td>
+      <td>10</td>
+      <td>Magmalindwurm</td>
+      <td>Feldboss</td>
+      <td>Haus Vulkan</td>
+      <td>Drachenherz</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><input type="checkbox"></td>
+      <td>11</td>
+      <td>Adliger der Götterskalpe</td>
+      <td>Hauptboss</td>
+      <td>Haus Vulkan</td>
+      <td>Götterskalpnadel, Erhabene Präsenz</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><input type="checkbox"></td>
+      <td>12</td>
+      <td>Götterverschlingende Schlange & Rykard, Fürst der Blasphemie</td>
+      <td>Hauptboss</td>
+      <td>Haus Vulkan</td>
+      <td>Rykards Große Rune, Echo des Blasphemischen</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><input type="checkbox"></td>
+      <td>13</td>
+      <td>Parfümeurin Tricia & Löwenartiges Scheusal</td>
+      <td>Dungeonboss</td>
+      <td>Entstellte Katakomben</td>
+      <td>Asche der Parfümeurin Tricia</td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+        </div>
+    </section>
+    <section class="region">
+      <button class="accordion">Leyndell</button>
+        <div class="panel">
+<table class="boss-table">
+  <thead>
+    <tr>
+      <th>✔</th>
+      <th>#</th>
+      <th>Bossname</th>
+      <th>Kategorie</th>
+      <th>Fundort</th>
+      <th>Belohnung</th>
+      <th>Anmerkungen</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><input type="checkbox"></td>
+      <td>1</td>
+      <td>Esgar, Priester des Blutes</td>
+      <td>Dungeonboss</td>
+      <td>Katakomben von Leyndell</td>
+      <td>Jubel des Blutes</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><input type="checkbox"></td>
+      <td>2</td>
+      <td>Mohg, das Mal</td>
+      <td>Dungeonboss</td>
+      <td>Unterirdisches Reservat der Scham</td>
+      <td>Blutflammenklauen</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><input type="checkbox"></td>
+      <td>3</td>
+      <td>Grausame Zwillinge</td>
+      <td>Feldboss</td>
+      <td>Leyndell (Osten)</td>
+      <td>Asche von Maltöter Rollo</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><input type="checkbox"></td>
+      <td>4</td>
+      <td>Godfrey, Erster Eldenfürst</td>
+      <td>Hauptboss</td>
+      <td>Leyndell (Süden)</td>
+      <td>Talismanbeutel</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><input type="checkbox"></td>
+      <td>5</td>
+      <td>Morgott, König des Mals</td>
+      <td>Hauptboss</td>
+      <td>Leyndell (Süden)</td>
+      <td>Morgotts Große Rune, Echo des Malkönigs</td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+        </div>
+    </section>
+    <section class="region">
+      <button class="accordion">Berggipfel der Riesen</button>
+        <div class="panel">
+  <table class="boss-table">
+  <thead>
+    <tr>
+      <th>✔</th>
+      <th>#</th>
+      <th>Bossname</th>
+      <th>Kategorie</th>
+      <th>Fundort</th>
+      <th>Belohnung</th>
+      <th>Anmerkungen</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><input type="checkbox"></td>
+      <td>1</td>
+      <td>Dunkelkavallerist</td>
+      <td>Feldboss</td>
+      <td>Berggipfel (Südwesten)</td>
+      <td>Phantomschnitt (Kriegsasche)</td>
+      <td>Erscheint nur nachts</td>
+    </tr>
+    <tr>
+      <td><input type="checkbox"></td>
+      <td>2</td>
+      <td>Verehrer der Schwarzen Klinge</td>
+      <td>Feldboss</td>
+      <td>Berggipfel (Süden)</td>
+      <td>Gargoyle-Doppelschwarzklinge (Waffe), Gargoyle-Schwarzaxt (Waffe)</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><input type="checkbox"></td>
+      <td>3</td>
+      <td>Uralter Held von Zamor</td>
+      <td>Dungeonboss</td>
+      <td>Grab des heroischen Riesentöters</td>
+      <td>Zamorkrummschwert (Waffe), Zamor-Maske (Rüstung), Zamor-Rüstung, Zamor-Armreife (Rüstung), Zamor-Beinwickel (Rüstung)</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><input type="checkbox"></td>
+      <td>4</td>
+      <td>Borealis, der eisige Nebel</td>
+      <td>Feldboss</td>
+      <td>Berggipfel (Osten)</td>
+      <td>Drachenherz</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><input type="checkbox"></td>
+      <td>5</td>
+      <td>Ritter Vyke der Tafelrundfeste</td>
+      <td>Siegelboss</td>
+      <td>Siegelgefängnis des Fürstenanwärters</td>
+      <td>Vykes Drachenblitz (Anrufung), Fingerabdruckrüstung, Fingerabdruckhelm (Rüstung), Fingerabdruckstulpen (Rüstung), Fingerabdruckbeinschutz (Rüstung)</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><input type="checkbox"></td>
+      <td>6</td>
+      <td>Apostel & Adliger der Götterskalpe</td>
+      <td>Dungeonboss</td>
+      <td>Höhle des Geisterrufers</td>
+      <td>Tuch der Götterskalpe (Talisman), Ritual der schwarzen Flamme (Anrufung)</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><input type="checkbox"></td>
+      <td>7</td>
+      <td>Tibiaseefahrer</td>
+      <td>Feldboss</td>
+      <td>Berggipfel (Norden)</td>
+      <td>Todeswurzel, Helphens Spitzturm (Waffe)</td>
+      <td>Kein Lebensbalken</td>
+    </tr>
+    <tr>
+      <td><input type="checkbox"></td>
+      <td>8</td>
+      <td>Todesritenvogel</td>
+      <td>Feldboss</td>
+      <td>Berggipfel (Nordwesten)</td>
+      <td>Todesritualspeer</td>
+      <td>Erscheint nur nachts</td>
+    </tr>
+    <tr>
+      <td><input type="checkbox"></td>
+      <td>9</td>
+      <td>Kommandant Niall</td>
+      <td>Dungeonboss</td>
+      <td>Schloss Sol</td>
+      <td>Veteranenprothese</td>
+      <td>Bewacht einen Teil des Geheimen Haligbaummedaillon</td>
+    </tr>
+    <tr>
+      <td><input type="checkbox"></td>
+      <td>10</td>
+      <td>Avatar des Erdenbaums</td>
+      <td>Feldboss</td>
+      <td>Berggipfel (Zentrum)</td>
+      <td>Himmelblaue Kristallträne, Purpurrote Blasenträne</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><input type="checkbox"></td>
+      <td>11</td>
+      <td>Baumgeist mit Geschwüren</td>
+      <td>Dungeonboss</td>
+      <td>Katakomben des Riesengipfels</td>
+      <td>Goldene Saat, Todeswurzel, Klangperle 2 des Tallilienpflückers</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><input type="checkbox"></td>
+      <td>12</td>
+      <td>Feuerriese</td>
+      <td>Hauptboss</td>
+      <td>Berggipfel (Südosten)</td>
+      <td>Echo des Feuerriesen</td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+        </div>
+    </section>
+    <section class="region">
+      <button class="accordion">Geweihtes Schneefeld</button>
+        <div class="panel">
+  <table class="boss-table">
+  <thead>
+    <tr>
+      <th>✔</th>
+      <th>#</th>
+      <th>Bossname</th>
+      <th>Kategorie</th>
+      <th>Fundort</th>
+      <th>Belohnung</th>
+      <th>Anmerkungen</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><input type="checkbox"></td>
+      <td>1</td>
+      <td>Verirrte Imitatorträne</td>
+      <td>Dungeonboss</td>
+      <td>Geheimpfad zum Haligbaum</td>
+      <td>Todeswurzel, Asche des Schwarzflammenmönchs Amon</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><input type="checkbox"></td>
+      <td>2</td>
+      <td>2x Dunkelkavallerist</td>
+      <td>Feldboss</td>
+      <td>Geweihtes Schneefeld (Süden)</td>
+      <td>Dunkelkavalleristen-Helm (Rüstung), Dunkelkavalleristen-Rüstung, Dunkelkavalleristen-Stulpen (Rüstung), Dunkelkavalleristen-Beinschutz (Rüstung), Uralter Drachenschmiedestein</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><input type="checkbox"></td>
+      <td>3</td>
+      <td>Astel, Stern der Finsternis</td>
+      <td>Dungeonboss</td>
+      <td>Tunnel von Yelough Anix</td>
+      <td>Meteorit von Astel (Zauber)</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><input type="checkbox"></td>
+      <td>4</td>
+      <td>Stinkender Grabhüterduellant</td>
+      <td>Dungeonboss</td>
+      <td>Katakomben des Geweihten Schneefelds</td>
+      <td>Große Gräbertallilie, Verrotteter Grabhüterumhang (Rüstung)</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><input type="checkbox"></td>
+      <td>5</td>
+      <td>Großer Lindwurm Theodorix</td>
+      <td>Feldboss</td>
+      <td>Geweihtes Schneefeld (Osten)</td>
+      <td>3x Drachenherz</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><input type="checkbox"></td>
+      <td>6</td>
+      <td>Kreuzfahrerscheusal</td>
+      <td>Dungeonboss</td>
+      <td>Höhle der Verlorenen</td>
+      <td>Großschwert der Goldenen Ordnung (Waffe)</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><input type="checkbox"></td>
+      <td>7</td>
+      <td>Stinkender Avatar</td>
+      <td>Feldboss</td>
+      <td>Geweihtes Schneefeld (Nordosten)</td>
+      <td>Gesprungene Dornenträne, Gesprungene Kristallträne</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><input type="checkbox"></td>
+      <td>8</td>
+      <td>Todesritenvogel</td>
+      <td>Feldboss</td>
+      <td>Geweihtes Schneefeld (Nordwesten)</td>
+      <td>Sprenggeisterflamme (Zauber)</td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+        </div>
+    </section>
+    <section class="region">
+      <button class="accordion">Zerfallenes Farum Azula, Miquellas Haligbaum & Leyndell, Aschene Hauptstadt</button>
+        <div class="panel">
+   <table class="boss-table">
+  <thead>
+    <tr>
+      <th>✔</th>
+      <th>#</th>
+      <th>Bossname</th>
+      <th>Kategorie</th>
+      <th>Fundort</th>
+      <th>Belohnung</th>
+      <th>Anmerkungen</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><input type="checkbox"></td>
+      <td>1</td>
+      <td>Duo der Götterskalpe</td>
+      <td>Hauptboss</td>
+      <td>Farum Azula (Norden)</td>
+      <td>Klangperle 4 des Schmiedesteinschürfers, Schwarzflammentornado (Kriegsasche)</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><input type="checkbox"></td>
+      <td>2</td>
+      <td>Drachenbaumwächter</td>
+      <td>Feldboss</td>
+      <td>Farum Azula (Osten)</td>
+      <td>Deformierte Drachenrüstung (Rüstungs-Set)</td>
+      <td>Kein Lebensbalken</td>
+    </tr>
+    <tr>
+      <td><input type="checkbox"></td>
+      <td>3</td>
+      <td>Bestienkleriker & Maliketh, die Schwarze Klinge</td>
+      <td>Hauptboss</td>
+      <td>Farum Azula (Osten)</td>
+      <td>Echo der Schwarzen Klinge</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><input type="checkbox"></td>
+      <td>4</td>
+      <td>Drachenfürst Placidusax</td>
+      <td>Hauptboss</td>
+      <td>Farum Azula (Zentrum)</td>
+      <td>Echo des Drachenfürsten</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><input type="checkbox"></td>
+      <td>5</td>
+      <td>Loretta, Ritterin des Haligbaums</td>
+      <td>Hauptboss</td>
+      <td>Miquellas Haligbaum</td>
+      <td>Lorettas Geschick (Zauber), Lorettas Kriegssichel (Waffe)</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><input type="checkbox"></td>
+      <td>6</td>
+      <td>Malenia, Miquellas Klinge & Malenia, Göttin der Fäulnis</td>
+      <td>Hauptboss</td>
+      <td>Miquellas Haligbaum</td>
+      <td>Malenias Große Rune, Echo der Fäulnisgöttin</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><input type="checkbox"></td>
+      <td>7</td>
+      <td>Gideon Ofnir, der Allwissende</td>
+      <td>Hauptboss</td>
+      <td>Leyndell, Aschene Hauptstadt</td>
+      <td>Zepter des Allwissenden (Waffe), Rüstung des Allwissenden (Rüstungs-Set)</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><input type="checkbox"></td>
+      <td>8</td>
+      <td>Godfrey, der Erste Eldenfürst</td>
+      <td>Hauptboss</td>
+      <td>Leyndell, Aschene Hauptstadt</td>
+      <td>Echo von Hoarah Loux</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><input type="checkbox"></td>
+      <td>9</td>
+      <td>Radagon von der Goldenen Ordnung & Eldenbestie</td>
+      <td>Hauptboss</td>
+      <td>Leyndell, Aschene Hauptstadt</td>
+      <td>Eldenecho</td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+        </div>
+    </section>
+    <section class="region">
+  <button class="accordion">DLC Bosse – Hauptbosse</button>
+        <div class="panel">
+  <table class="boss-table">
+    <thead>
+      <tr>
+        <th>✔</th>
+        <th>Name</th>
+        <th>Ort</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td><input type="checkbox"></td><td>Rellana, Zwillings-Mondritterin</td><td>Schloss Ensis</td></tr>
+      <tr><td><input type="checkbox"></td><td>Fäulnisritter</td><td>Riss im Steinsarg</td></tr>
+      <tr><td><input type="checkbox"></td><td>Bayle der Schreckliche</td><td>Klingengipfel</td></tr>
+      <tr><td><input type="checkbox"></td><td>Göttliche Bestie - Tanzender Löwe</td><td>Belurat, Turmsiedlung</td></tr>
+      <tr><td><input type="checkbox"></td><td>Metyr, Mutter der Finger</td><td>Fingerruinen von Miyr</td></tr>
+      <tr><td><input type="checkbox"></td><td>Midra, Herr der Rasenden Flamme</td><td>Midras Pfarrhaus</td></tr>
+      <tr><td><input type="checkbox"></td><td>Messmer der Pfähler</td><td>Schattenbergfried</td></tr>
+      <tr><td><input type="checkbox"></td><td>Kommandant Gaius</td><td>Schattenbergfried</td></tr>
+      <tr><td><input type="checkbox"></td><td>Avatar des Scadubaums</td><td>Fuß des Scadubaums</td></tr>
+      <tr><td><input type="checkbox"></td><td>Romina, Heilige der Knospe</td><td>Uralte Ruinen von Rauh</td></tr>
+      <tr><td><input type="checkbox"></td><td>Radahn, versprochener Gemahl</td><td>Enir-Ilim</td></tr>
+    </tbody>
+  </table>
+        </div>
+</section>
+
+<section class="region">
+  <button class="accordion">DLC Bosse – Nebenbosse</button>
+    <div class="panel">
+  <table class="boss-table">
+    <thead>
+      <tr>
+        <th>✔</th>
+        <th>Name</th>
+        <th>Ort</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td><input type="checkbox"></td><td>Ritter des Einsamen Kerkers</td><td>Westliches namenloses Mausoleum</td></tr>
+      <tr><td><input type="checkbox"></td><td>Roter Bär</td><td>Nördliches namenloses Mausoleum</td></tr>
+      <tr><td><input type="checkbox"></td><td>Geisterflammendrache</td><td>Verlassenes leidendes Dorf, Himmelblaues Ufer</td></tr>
+      <tr><td><input type="checkbox"></td><td>Blutunhold-Anführer</td><td>Höhle an der Flussmündung</td></tr>
+      <tr><td><input type="checkbox"></td><td>Halbmenschen-Schwertmeister Onze</td><td>Kerker von Belurat</td></tr>
+      <tr><td><input type="checkbox"></td><td>Todesritter #1</td><td>Nebelriss-Katakomben</td></tr>
+      <tr><td><input type="checkbox"></td><td>Schwarzer Ritter Garrew</td><td>Nebelriss-Festung</td></tr>
+      <tr><td><input type="checkbox"></td><td>Uralter Drachenmensch</td><td>Drachengrube</td></tr>
+      <tr><td><input type="checkbox"></td><td>Halbmenschen-Königin Marigga</td><td>Himmelblaues Ufer</td></tr>
+      <tr><td><input type="checkbox"></td><td>Tänzerin von Ranah</td><td>Südliches namenloses Mausoleum</td></tr>
+      <tr><td><input type="checkbox"></td><td>Todesritenvogel</td><td>Charos verstecktes Grab</td></tr>
+      <tr><td><input type="checkbox"></td><td>Kläger</td><td>Kerker des Klägers</td></tr>
+      <tr><td><input type="checkbox"></td><td>Klingengipfel-Drachling</td><td>Fuß des Klingengipfels</td></tr>
+      <tr><td><input type="checkbox"></td><td>Uralter Drache Senessax</td><td>Klingengipfel</td></tr>
+      <tr><td><input type="checkbox"></td><td>Rugalea, der große rote Bär</td><td>Ruinen der Tempelstadt</td></tr>
+      <tr><td><input type="checkbox"></td><td>Todesritter #2</td><td>Katakomben am Skorpionsfluss</td></tr>
+      <tr><td><input type="checkbox"></td><td>Trockenblatt Dane</td><td>Ruinen von Moorth</td></tr>
+      <tr><td><input type="checkbox"></td><td>Ralva, der große rote Bär</td><td>Scadu Altus</td></tr>
+      <tr><td><input type="checkbox"></td><td>Schwarzer Ritter Edredd</td><td>Festung des Tadels</td></tr>
+      <tr><td><input type="checkbox"></td><td>Fluchklingen Labirith</td><td>Kerker von Bonny</td></tr>
+      <tr><td><input type="checkbox"></td><td>Fürst Ymir, Mutter der Finger</td><td>Kathedrale von Manus Metyr</td></tr>
+      <tr><td><input type="checkbox"></td><td>Rakshasa</td><td>Östliches namenloses Mausoleum</td></tr>
+      <tr><td><input type="checkbox"></td><td>Jori, Ältester Inquisitor</td><td>Dunkellichtkatakomben</td></tr>
+      <tr><td><input type="checkbox"></td><td>Goldenes Nilpferd</td><td>Schattenbergfried</td></tr>
+      <tr><td><input type="checkbox"></td><td>Baumwächter</td><td>Schaman-Dorf</td></tr>
+    </tbody>
+  </table>
+    </div>
+</section>
+
+  
+
+<button class="accordion">Bosse erledigt</button>
+<canvas id="bossChart" width="400" height="200"></canvas>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  // --- Accordion-Funktion ---
+  const accordions = document.querySelectorAll('.accordion');
+  accordions.forEach(btn => {
+    btn.addEventListener('click', () => {
+      btn.classList.toggle('active');
+      const panel = btn.nextElementSibling;
+      if (panel.style.maxHeight) {
+        panel.style.maxHeight = null;
+      } else {
+        panel.style.maxHeight = panel.scrollHeight + "px";
+      }
+    });
+  });
+
+  // --- Suchfunktion ---
+  const searchInput = document.getElementById('search');
+  searchInput.addEventListener('input', () => {
+    const query = searchInput.value.toLowerCase();
+    const regions = document.querySelectorAll('.region');
+
+    regions.forEach(region => {
+      const regionName = region.querySelector('.accordion').textContent.toLowerCase();
+      const table = region.querySelector('table');
+      const rows = table.querySelectorAll('tbody tr');
+
+      let anyVisible = false;
+
+      rows.forEach(row => {
+        const rowText = row.textContent.toLowerCase();
+        if (rowText.includes(query) || regionName.includes(query)) {
+          row.style.display = '';
+          anyVisible = true;
+        } else {
+          row.style.display = 'none';
+        }
+      });
+
+      // Region nur anzeigen, wenn mindestens eine Zeile sichtbar ist
+      region.style.display = anyVisible ? '' : 'none';
+    });
+  });
+
+  // --- Fortschrittsanzeige ---
+  const totalBosses = document.querySelectorAll('.boss-table tbody tr').length;
+  const progress = document.createElement('div');
+  progress.id = 'progress';
+  progress.style.margin = '15px 0';
+  progress.style.fontWeight = 'bold';
+  progress.textContent = `Boss-Fortschritt: 0 / ${totalBosses}`;
+  document.body.insertBefore(progress, document.getElementById('search').nextSibling);
+
+  const checkboxes = document.querySelectorAll('.boss-table tbody input[type="checkbox"]');
+  checkboxes.forEach(cb => {
+    cb.addEventListener('change', () => {
+      const checked = document.querySelectorAll('.boss-table tbody input[type="checkbox"]:checked').length;
+      progress.textContent = `Boss-Fortschritt: ${checked} / ${totalBosses}`;
+    });
+  });
+});
+</script>
+
+
+</body>
+</html>
