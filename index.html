@@ -5,65 +5,88 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Elden Ring Boss-Checkliste</title>
 <style>
+  /* Grundlayout */
   body { font-family: sans-serif; padding: 20px; background: #f8f8f8; }
 
   .accordion {
-  background-color: #eee;
-  color: #333;
-  cursor: pointer;
-  padding: 12px 18px;
-  width: 100%;
-  text-align: left;
-  border: none;
-  outline: none;
-  font-size: 18px;
-  transition: background-color 0.3s;
-}
-
-.accordion:hover {
-  background-color: #ddd;
-}
-
-.panel {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.3s ease-out;
-}
-
-
-  .region {
-    margin-bottom: 50px;
+    background-color: #eee;
+    color: #333;
+    cursor: pointer;
+    padding: 12px 18px;
+    width: 100%;
+    text-align: left;
+    border: none;
+    outline: none;
+    font-size: 18px;
+    transition: background-color 0.3s;
   }
+  .accordion:hover { background-color: #ddd; }
+  .panel { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; }
 
-  /* Container für mehrere Tabellen nebeneinander
-     -> Grid mit auto-fit/minmax sorgt dafür, dass bei breiterem Bildschirm
-        mehrere Tabellen (2–3+) nebeneinander angezeigt werden können */
+  .region { margin-bottom: 50px; }
+
   .region-tables {
     display: grid;
-    gap: 20px; /* Abstand zwischen Tabellen */
+    gap: 20px;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    align-items: start; /* Tabellen oben ausrichten */
+    align-items: start;
   }
 
+  /* Einheitliches Tabellen-Layout:
+     table-layout: fixed sorgt dafür, dass die angegebenen Breiten
+     der Spalten zuverlässig und konsistent angewendet werden. */
   .boss-table {
     border-collapse: collapse;
-    width: 100%;      /* Nimmt die volle Breite der Grid-Zelle ein */
-    min-width: 0;     /* Wichtig, damit Grid-Zellen schrumpfen können */
+    width: 100%;
+    table-layout: fixed;   /* wichtig für feste Spaltenbreiten */
+    min-width: 0;
     margin-bottom: 20px;
     background: #fff;
     box-shadow: 0 1px 3px rgba(0,0,0,0.06);
     overflow: hidden;
   }
 
+  /* Spaltenbreiten (in Prozent; Summe = 100%)
+     1: Checkbox (klein)
+     2: Nummer (klein)
+     3: Bossname (groß)
+     4: Kategorie (klein-mittel)
+     5: Fundort (mittel)
+     6: Belohnung (mittel)
+     7: Anmerkungen (klein-mittel)
+  */
+  .boss-table th:nth-child(1),
+  .boss-table td:nth-child(1) { width: 6%; text-align: center; }
+  .boss-table th:nth-child(2),
+  .boss-table td:nth-child(2) { width: 6%; text-align: center; }
+  .boss-table th:nth-child(3),
+  .boss-table td:nth-child(3) { width: 32%; }
+  .boss-table th:nth-child(4),
+  .boss-table td:nth-child(4) { width: 12%; }
+  .boss-table th:nth-child(5),
+  .boss-table td:nth-child(5) { width: 20%; }
+  .boss-table th:nth-child(6),
+  .boss-table td:nth-child(6) { width: 14%; }
+  .boss-table th:nth-child(7),
+  .boss-table td:nth-child(7) { width: 10%; }
+
   .boss-table th, .boss-table td {
     border: 1px solid #ccc;
     padding: 8px;
     text-align: left;
-    word-break: break-word;
+    vertical-align: middle;
+    word-break: break-word; /* erlaubt Umbruch innerhalb langer Wörter */
   }
 
   .boss-table th {
     background: #eee;
+  }
+
+  /* kleine Optimierung: checkbox zentrieren */
+  .boss-table td input[type="checkbox"] {
+    display: inline-block;
+    transform: translateY(0); /* keine vertikale Verschiebung */
+    margin: 0;
   }
 
   #search {
@@ -73,19 +96,22 @@
     font-size: 16px;
   }
 
-  /* Optional: Feintuning für sehr breite Bildschirme */
+  /* Responsive Anpassungen */
   @media (min-width: 1200px) {
-    .region-tables {
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    }
+    .region-tables { grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); }
   }
 
-  /* Optional: engeres Layout auf sehr kleinen Bildschirmen */
+  @media (max-width: 720px) {
+    /* Auf engeren Displays können die Spalten etwas kompakter werden.
+       Wir erlauben weiterhin Umbruch, damit Inhalte nicht abgeschnitten werden. */
+    .boss-table th, .boss-table td { padding: 6px; font-size: 14px; }
+  }
+
   @media (max-width: 420px) {
-    .boss-table th, .boss-table td {
-      padding: 6px;
-      font-size: 14px;
-    }
+    .boss-table th, .boss-table td { padding: 6px; font-size: 13px; }
+    /* Optional: falls du auf sehr kleinen Bildschirmen lieber Scrollen statt Zeilenumbruch:
+       uncomment the next line to enable horizontal scroll for tables */
+    /* .panel { overflow-x: auto; } */
   }
 </style>
 
