@@ -121,6 +121,27 @@
 <h1>Elden Ring Boss-Checkliste</h1>
 
 <input type="text" id="search" placeholder="Nach Boss oder Region filtern..." aria-label="Suche Boss oder Region">
+  <!-- Progress-UI: direkt NACH dem Suchfeld <input id="search"> einfügen -->
+<div class="progress-wrap" aria-hidden="false">
+  <div class="progress-box" title="Fortschritt über alle Boss-Einträge">
+    <div class="progress-label">Gesamtfortschritt</div>
+    <svg class="donut" viewBox="0 0 36 36" aria-hidden="true" focusable="false">
+      <circle class="bg" cx="18" cy="18" r="12" stroke="#eee" stroke-width="14" fill="none"></circle>
+      <circle class="fg" cx="18" cy="18" r="12" stroke="#4caf50" stroke-width="14" stroke-linecap="round" fill="none"></circle>
+      <text x="50%" y="50%" text-anchor="middle" dy="0.35em" font-size="6" fill="#111" id="donutText">0%</text>
+    </svg>
+    <div class="progress-numbers" id="progressNumbers">0 von 0 besiegt</div>
+    <div class="bar" aria-hidden="true" style="width:220px;height:12px;background:#eee;border-radius:8px;overflow:hidden;margin-top:6px;">
+      <div class="bar-inner" id="barInner" style="width:0%;height:100%;background:linear-gradient(90deg,#4caf50,#66bb6a);"></div>
+    </div>
+  </div>
+
+  <div class="progress-box" title="Sichtbare (gefilterte) Boss-Einträge">
+    <div class="progress-label">Sichtbar (Filter)</div>
+    <div style="font-size:28px;font-weight:700" id="visiblePercent">0%</div>
+    <div class="progress-numbers" id="visibleNumbers">0 von 0</div>
+  </div>
+</div>
 
     <section class="region">
       <button class="accordion">Limgrave</button>
@@ -1408,7 +1429,122 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 </script>
+// Füge dieses Skript VOR </body> ein
 
+(function () {
+  const searchInput = document.getElementById('search');
+  const donutText = document.getElementById('donutText');
+  const fgCircle = document.querySelector('.donut .fg');
+  const barInner = document.getElementById('barInner');
+  const progressNumbers = document.getElementById('progressNumbers');
+  const visiblePercent = document.getElementById('visiblePercent');
+  const visibleNumbers = document.getElementById('visibleNumbers');
+  const accordionButtons = Array.from(document.querySelectorAll('.accordion'));
+
+  // Donut circle radius/umfang (r=12)
+  const R = 12;
+  const circumference = 2 * Math.PI * R;
+  if (fgCircle) {
+    fgCircle.setAttribute('stroke-dasharray', `${circumference} ${circumference}`);
+    fgCircle.style.strokeDashoffset = circumference;
+    fgCircle.style.transform = 'rotate(-90deg)';
+    fgCircle.style.transformOrigin = '50% 50%';
+  }
+
+  // Accordion-Verhalten (einfach)
+  accordionButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      btn.classList.toggle('active');
+      const panel = btn.nextElementSibling;
+      if (!panel) return;
+      if (panel.style.maxHeight && panel.style.maxHeight !== '0px') {
+        panel.style.maxHeight = null;
+      } else {
+        panel.style.maxHeight = panel.scrollHeight + 'px';
+      }
+    });
+    const p = btn.nextElementSibling;
+    if (p) p.style.maxHeight = null;
+  });
+
+  function updateProgress() {
+    const allBoxes = Array.from(document.querySelectorAll('.boss-table tbody input[type="checkbox"]'));
+    const total = allBoxes.length;
+    const checked = allBoxes.filter(cb => cb.checked).length;
+    const percent = total === 0 ? 0 : Math.round((checked / total) * 100);
+
+    if (donutText) donutText.textContent = percent + '%';
+    if (fgCircle) {
+      const offset = circumference - (percent / 100) * circumference;
+      fgCircle.style.strokeDashoffset = offset;
+    }
+    if (barInner) barInner.style.width = percent + '%';
+    if (progressNumbers) progressNumbers.textContent = `${checked} von ${total} besiegt`;
+
+    const visibleRows = Array.from(document.querySelectorAll('.boss-table tbody tr')).filter(tr => tr.offsetParent !== null);
+    const visibleTotal = visibleRows.length;
+    const visibleChecked = visibleRows.filter(tr => tr.querySelector('input[type="checkbox"]').checked).length;
+    const visiblePct = visibleTotal === 0 ? 0 : Math.round((visibleChecked / visibleTotal) * 100);
+    if (visiblePercent) visiblePercent.textContent = visiblePct + '%';
+    if (visibleNumbers) visibleNumbers.textContent = `${visibleChecked} von ${visibleTotal}`;
+  }
+
+  function attachCheckboxListeners() {
+    const allBoxes = document.querySelectorAll('.boss-table tbody input[type="checkbox"]');
+    allBoxes.forEach(cb => {
+      cb.removeEventListener('change', updateProgress);
+      cb.addEventListener('change', updateProgress);
+    });
+  }
+
+  function applyFilter() {
+    const q = (searchInput && searchInput.value || '').trim().toLowerCase();
+    const regions = Array.from(document.querySelectorAll('.region'));
+    regions.forEach(region => {
+      const regionNameBtn = region.querySelector('.accordion');
+      const regionName = regionNameBtn ? regionNameBtn.textContent.trim().toLowerCase() : '';
+      const rows = Array.from(region.querySelectorAll('tbody tr'));
+      let regionHasMatch = false;
+
+      rows.forEach(row => {
+        const text = Array.from(row.cells).map(c => c.textContent.trim().toLowerCase()).join(' ');
+        const matches = q === '' || text.includes(q) || regionName.includes(q);
+        row.style.display = matches ? '' : 'none';
+        if (matches) regionHasMatch = true;
+      });
+
+      const panel = region.querySelector('.panel');
+      if (panel) panel.style.display = regionHasMatch ? '' : 'none';
+    });
+
+    setTimeout(updateProgress, 40);
+  }
+
+  function init() {
+    attachCheckboxListeners();
+    updateProgress();
+
+    let debounce;
+    if (searchInput) {
+      searchInput.addEventListener('input', () => {
+        clearTimeout(debounce);
+        debounce = setTimeout(applyFilter, 150);
+      });
+    }
+
+    window.addEventListener('resize', () => {
+      accordionButtons.forEach(btn => {
+        const panel = btn.nextElementSibling;
+        if (btn.classList.contains('active') && panel) {
+          panel.style.maxHeight = panel.scrollHeight + 'px';
+        }
+      });
+    });
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
+})();
 
 </body>
 </html>
