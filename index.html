@@ -1472,117 +1472,48 @@
   }
 
   document.addEventListener('DOMContentLoaded', () => {
-    // 1) ID-Vergabe für Checkboxen (falls noch keine IDs vorhanden)
-    document.querySelectorAll('.region').forEach((regionEl, rIndex) => {
-      const btn = regionEl.querySelector('.accordion');
-      const regionName = btn ? btn.textContent.trim() : `region_${rIndex}`;
-      const idPrefix = sanitizeId(regionName) || `region_${rIndex}`;
-      regionEl.querySelectorAll('tbody tr').forEach((tr, rowIndex) => {
-        const cb = tr.querySelector('input[type="checkbox"]');
-        if (!cb) return;
-        if (!cb.id) cb.id = `${idPrefix}_row_${rowIndex}`;
-      });
-    });
+  const accBtns = Array.from(document.querySelectorAll('.accordion'));
+  let accState = [];
+  try {
+    accState = JSON.parse(localStorage.getItem(ACC_KEY) || '[]');
+  } catch (e) { accState = []; }
 
-    // 2) Wiederherstellen der Checkbox-Zustände
-    let savedChecks = {};
-    try {
-      savedChecks = JSON.parse(localStorage.getItem(CHECK_KEY) || '{}');
-    } catch (e) {
-      savedChecks = {};
+  accBtns.forEach((btn, idx) => {
+    const panel = btn.nextElementSibling;
+    if (!panel) return;
+
+    // 1️⃣ Standardmäßig geschlossen
+    panel.style.maxHeight = null;
+
+    // 2️⃣ Wiederherstellen gespeicherter geöffneten Panels
+    if (accState.includes(idx)) {
+      panel.style.maxHeight = panel.scrollHeight + 'px';
     }
-    Object.entries(savedChecks).forEach(([id, checked]) => {
-      const cb = document.getElementById(id);
-      if (cb) cb.checked = !!checked;
-    });
 
-    // 3) Listener zum Speichern bei Änderung
-    document.querySelectorAll('.boss-table input[type="checkbox"]').forEach(cb => {
-      cb.addEventListener('change', () => {
-        let s = {};
-        try {
-          s = JSON.parse(localStorage.getItem(CHECK_KEY) || '{}');
-        } catch (e) { s = {}; }
-        s[cb.id] = cb.checked;
-        localStorage.setItem(CHECK_KEY, JSON.stringify(s));
-      });
-    });
-
-    // 4) Akkordeon: öffnen/schließen + Zustand speichern
-    const accBtns = Array.from(document.querySelectorAll('.accordion'));
-    let accState = [];
-    try {
-      accState = JSON.parse(localStorage.getItem(ACC_KEY) || '[]');
-    } catch (e) { accState = []; }
-
-    accBtns.forEach((btn, idx) => {
-      const panel = btn.nextElementSibling;
-      if (!panel) return;
-
-      // initialer Zustand
-      if (accState.includes(idx)) {
-        panel.style.maxHeight = panel.scrollHeight + 'px';
-      } else {
+    // 3️⃣ Klick-Event zum Öffnen/Schließen
+    btn.addEventListener('click', () => {
+      const isOpen = panel.style.maxHeight && panel.style.maxHeight !== '0px';
+      if (isOpen) {
         panel.style.maxHeight = null;
+        const p = accState.indexOf(idx);
+        if (p > -1) accState.splice(p, 1);
+      } else {
+        panel.style.maxHeight = panel.scrollHeight + 'px';
+        if (!accState.includes(idx)) accState.push(idx);
       }
-
-      btn.addEventListener('click', () => {
-        const isOpen = panel.style.maxHeight && panel.style.maxHeight !== '0px';
-        if (isOpen) {
-          panel.style.maxHeight = null;
-          const p = accState.indexOf(idx);
-          if (p > -1) accState.splice(p, 1);
-        } else {
-          panel.style.maxHeight = panel.scrollHeight + 'px';
-          if (!accState.includes(idx)) accState.push(idx);
-        }
-        localStorage.setItem(ACC_KEY, JSON.stringify(accState));
-      });
-
-      // wenn Panel-Inhalt (z. B. responsive) seine Höhe ändert, maxHeight anpassen
-      const ro = new ResizeObserver(() => {
-        if (panel.style.maxHeight && panel.style.maxHeight !== '0px') {
-          panel.style.maxHeight = panel.scrollHeight + 'px';
-        }
-      });
-      ro.observe(panel);
+      localStorage.setItem(ACC_KEY, JSON.stringify(accState));
     });
 
-    // 5) Suche / Filter
-    const search = document.getElementById('search');
-    function applyFilter(q) {
-      const query = (q || '').trim().toLowerCase();
-      document.querySelectorAll('.region').forEach(region => {
-        const btn = region.querySelector('.accordion');
-        const regionName = (btn ? btn.textContent : '').toLowerCase();
-        const rows = Array.from(region.querySelectorAll('tbody tr'));
-        let anyVisible = false;
-        rows.forEach(row => {
-          const text = row.textContent.toLowerCase();
-          const match = !query || text.includes(query) || regionName.includes(query);
-          row.style.display = match ? '' : 'none';
-          if (match) anyVisible = true;
-        });
-        const panel = region.querySelector('.panel');
-        // Wenn kein Treffer in der Region, komplett ausblenden (inkl. Button)
-        region.style.display = anyVisible ? '' : 'none';
-        // Option: Wenn Treffer, Panel öffnen automatisch
-        if (anyVisible && panel) {
-          // nur öffnen, nicht überschreiben gespeicherten Zustand
-          panel.style.maxHeight = panel.scrollHeight + 'px';
-        }
-      });
-    }
-    if (search) {
-      search.addEventListener('input', (e) => applyFilter(e.target.value));
-      // optional: initial anwenden (z. B. wenn Query-String vorhanden)
-      applyFilter(search.value);
-    }
-
-    // Utility: Möglichkeit, LocalStorage zurückzusetzen (für Debug)
-    // localStorage.removeItem(CHECK_KEY); localStorage.removeItem(ACC_KEY);
+    // 4️⃣ ResizeObserver für dynamische Höhe
+    const ro = new ResizeObserver(() => {
+      if (panel.style.maxHeight && panel.style.maxHeight !== '0px') {
+        panel.style.maxHeight = panel.scrollHeight + 'px';
+      }
+    });
+    ro.observe(panel);
   });
-})();
+});
+
 </script>  
 
 
