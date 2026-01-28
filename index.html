@@ -1511,42 +1511,13 @@ document.addEventListener('DOMContentLoaded', () => {
   document.body.insertBefore(progress, document.getElementById('search').nextSibling);
 
   const checkboxes = document.querySelectorAll('.boss-table tbody input[type="checkbox"]');
-
-// Funktion, um Fortschritt zu speichern
-function saveProgress() {
-  const progressData = [];
-  checkboxes.forEach((cb, index) => {
-    progressData[index] = cb.checked;
-  });
-  localStorage.setItem('bossProgress', JSON.stringify(progressData));
-}
-
-// Funktion, um Fortschritt zu laden
-function loadProgress() {
-  const savedData = JSON.parse(localStorage.getItem('bossProgress') || '[]');
-  checkboxes.forEach((cb, index) => {
-    cb.checked = savedData[index] || false;
-  });
-}
-
-// Fortschrittsanzeige aktualisieren
-function updateProgressText() {
-  const checked = document.querySelectorAll('.boss-table tbody input[type="checkbox"]:checked').length;
-  progress.textContent = `Boss-Fortschritt: ${checked} / ${totalBosses}`;
-}
-
-// Eventlistener für jede Checkbox
-checkboxes.forEach(cb => {
-  cb.addEventListener('change', () => {
-    updateProgressText();
-    saveProgress();
+  checkboxes.forEach(cb => {
+    cb.addEventListener('change', () => {
+      const checked = document.querySelectorAll('.boss-table tbody input[type="checkbox"]:checked').length;
+      progress.textContent = `Boss-Fortschritt: ${checked} / ${totalBosses}`;
+    });
   });
 });
-
-// Beim Laden der Seite
-loadProgress();
-updateProgressText();
-
 </script>
 
 
