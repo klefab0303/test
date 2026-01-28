@@ -1491,18 +1491,26 @@
     }
 
     // 3️⃣ Klick-Event zum Öffnen/Schließen
-    btn.addEventListener('click', () => {
-      const isOpen = panel.style.maxHeight && panel.style.maxHeight !== '0px';
-      if (isOpen) {
-        panel.style.maxHeight = null;
-        const p = accState.indexOf(idx);
-        if (p > -1) accState.splice(p, 1);
-      } else {
-        panel.style.maxHeight = panel.scrollHeight + 'px';
-        if (!accState.includes(idx)) accState.push(idx);
-      }
-      localStorage.setItem(ACC_KEY, JSON.stringify(accState));
-    });
+btn.addEventListener('click', () => {
+  const panel = btn.nextElementSibling;
+  const panelHeight = window.getComputedStyle(panel).maxHeight;
+  const isOpen = panelHeight !== '0px';
+
+  if (isOpen) {
+    // Panel schließen
+    panel.style.maxHeight = null;
+    const p = accState.indexOf(idx);
+    if (p > -1) accState.splice(p, 1);
+  } else {
+    // Panel öffnen
+    panel.style.maxHeight = panel.scrollHeight + 'px';
+    if (!accState.includes(idx)) accState.push(idx);
+  }
+
+  // LocalStorage aktualisieren
+  localStorage.setItem(ACC_KEY, JSON.stringify(accState));
+});
+
 
     // 4️⃣ ResizeObserver für dynamische Höhe
     const ro = new ResizeObserver(() => {
