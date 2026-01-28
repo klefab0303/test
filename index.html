@@ -1540,6 +1540,45 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 </script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+  // Accordion-Funktion (falls noch nicht vorhanden)
+  document.querySelectorAll(".accordion").forEach(btn => {
+    btn.addEventListener("click", () => {
+      btn.classList.toggle("active");
+      const panel = btn.nextElementSibling;
+      panel.style.maxHeight
+        ? panel.style.maxHeight = null
+        : panel.style.maxHeight = panel.scrollHeight + "px";
+    });
+  });
+
+  // Checkboxen mit stabilem LocalStorage-Key
+  document.querySelectorAll(".region").forEach(region => {
+    const regionName = region.querySelector(".accordion").innerText.trim();
+
+    region.querySelectorAll("tbody tr").forEach(row => {
+      const checkbox = row.querySelector('input[type="checkbox"]');
+      const bossName = row.children[2]?.innerText.trim();
+
+      if (!checkbox || !bossName) return;
+
+      const key = `eldenring:${regionName}:${bossName}`;
+
+      // Zustand laden
+      const saved = localStorage.getItem(key);
+      if (saved === "true") checkbox.checked = true;
+
+      // Zustand speichern
+      checkbox.addEventListener("change", () => {
+        localStorage.setItem(key, checkbox.checked);
+      });
+    });
+  });
+
+});
+</script>
 
 
 </body>
