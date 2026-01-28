@@ -1518,6 +1518,27 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+  const checkboxes = document.querySelectorAll('.boss-table input[type="checkbox"]');
+
+  checkboxes.forEach((checkbox, index) => {
+    const key = `boss-checkbox-${index}`;
+
+    // Zustand beim Laden wiederherstellen
+    const saved = localStorage.getItem(key);
+    if (saved === "true") {
+      checkbox.checked = true;
+    }
+
+    // Zustand speichern bei Änderung
+    checkbox.addEventListener("change", () => {
+      localStorage.setItem(key, checkbox.checked);
+    });
+  });
+});
+
+
 </script>
 
 
