@@ -19,19 +19,23 @@
 
   /* Grundlayout */
   body { font-family: sans-serif; padding: 20px; background: #f8f8f8; }
+.accordion {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
-  .accordion {
-    background-color: #eee;
-    color: #333;
-    cursor: pointer;
-    padding: 12px 18px;
-    width: 100%;
-    text-align: left;
-    border: none;
-    outline: none;
-    font-size: 18px;
-    transition: background-color 0.3s;
-  }
+  background-color: #eee;
+  color: #333;
+  cursor: pointer;
+  padding: 12px 18px;
+  width: 100%;
+  text-align: left;
+  border: none;
+  outline: none;
+  font-size: 18px;
+  transition: background-color 0.3s;
+}
+
   .accordion:hover { background-color: #ddd; }
   .panel { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; }
 
@@ -1488,6 +1492,33 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   });
+  function updateRegionProgress() {
+  const regions = document.querySelectorAll('.region');
+
+  regions.forEach(region => {
+    const button = region.querySelector('.accordion');
+    const checkboxes = region.querySelectorAll(
+      '.boss-table tbody input[type="checkbox"]'
+    );
+
+    const total = checkboxes.length;
+    const done = region.querySelectorAll(
+      '.boss-table tbody input[type="checkbox"]:checked'
+    ).length;
+
+    let progressEl = button.querySelector('.region-progress');
+    if (!progressEl) {
+      progressEl = document.createElement('span');
+      progressEl.className = 'region-progress';
+      button.appendChild(progressEl);
+    }
+
+    progressEl.textContent = `${done} / ${total}`;
+
+    progressEl.classList.toggle('done', done === total && total > 0);
+  });
+}
+
 
   // --- Suchfunktion ---
   const searchInput = document.getElementById('search');
@@ -1551,6 +1582,7 @@ document.addEventListener('DOMContentLoaded', () => {
   checkboxes.forEach(cb => {
     cb.addEventListener('change', () => {
       updateProgressText();
+      updateRegionProgress();
       saveProgress();
     });
   });
@@ -1558,6 +1590,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // --- Seite laden ---
   loadProgress();
   updateProgressText();
+  updateRegionProgress();
+
 });
 
 </script>
