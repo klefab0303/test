@@ -1585,6 +1585,21 @@ document.addEventListener('DOMContentLoaded', () => {
       region.style.display = anyVisible ? '' : 'none';
     });
   });
+    // --- Checkbox Eventlistener ---
+  checkboxes.forEach(cb => {
+    cb.addEventListener('change', () => {
+      updateProgressText();
+      updateRegionProgress();
+      saveProgress();
+    });
+  });
+
+  // --- Seite laden ---
+  loadProgress();
+  updateProgressText();
+  updateRegionProgress();
+
+});
 
   // --- Fortschrittsanzeige ---
   const totalBosses = document.querySelectorAll('.boss-table tbody tr').length;
@@ -1702,21 +1717,7 @@ function buildStatsChart() {
 
 
 
-  // --- Checkbox Eventlistener ---
-  checkboxes.forEach(cb => {
-    cb.addEventListener('change', () => {
-      updateProgressText();
-      updateRegionProgress();
-      saveProgress();
-    });
-  });
 
-  // --- Seite laden ---
-  loadProgress();
-  updateProgressText();
-  updateRegionProgress();
-
-});
 
 </script>
 
