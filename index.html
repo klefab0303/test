@@ -122,6 +122,35 @@
     margin-bottom: 20px;
     font-size: 16px;
   }
+  #statsBtn {
+  margin: 10px 0 20px;
+  padding: 10px 16px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+}
+
+.modal-content {
+  background: #fff;
+  margin: 5% auto;
+  padding: 20px;
+  max-width: 700px;
+  border-radius: 8px;
+}
+
+#closeStats {
+  float: right;
+  font-size: 26px;
+  cursor: pointer;
+}
+
 
   /* Responsive Anpassungen */
   @media (min-width: 1200px) {
@@ -152,6 +181,16 @@
 <h1>Elden Ring Boss-Checkliste</h1>
 
 <input type="text" id="search" placeholder="Nach Boss oder Region filtern..." aria-label="Suche Boss oder Region">
+  <button id="statsBtn">📊 Statistik</button>
+
+<div id="statsModal" class="modal">
+  <div class="modal-content">
+    <span id="closeStats">&times;</span>
+    <h2>Boss-Fortschritt</h2>
+    <canvas id="statsChart"></canvas>
+  </div>
+</div>
+
 
     <section class="region">
       <button class="accordion">Limgrave</button>
@@ -1577,6 +1616,80 @@ document.addEventListener('DOMContentLoaded', () => {
     const checked = document.querySelectorAll('.boss-table tbody input[type="checkbox"]:checked').length;
     progress.textContent = `Boss-Fortschritt: ${checked} / ${totalBosses}`;
   }
+  const statsBtn = document.getElementById('statsBtn');
+const statsModal = document.getElementById('statsModal');
+const closeStats = document.getElementById('closeStats');
+
+let chartInstance = null;
+
+statsBtn.addEventListener('click', () => {
+  statsModal.style.display = 'block';
+  buildStatsChart();
+});
+
+closeStats.addEventListener('click', () => {
+  statsModal.style.display = 'none';
+});
+
+window.addEventListener('click', e => {
+  if (e.target === statsModal) statsModal.style.display = 'none';
+});
+
+function buildStatsChart() {
+  const regions = document.querySelectorAll('.region');
+
+  const labels = [];
+  const values = [];
+
+  let totalDone = 0;
+  let totalBosses = 0;
+
+  regions.forEach(region => {
+    const name = region.querySelector('.accordion').childNodes[0].textContent.trim();
+    const boxes = region.querySelectorAll('tbody input[type="checkbox"]');
+    if (boxes.length === 0) return;
+
+    const done = region.querySelectorAll('tbody input[type="checkbox"]:checked').length;
+
+    const percent = Math.round((done / boxes.length) * 100);
+
+    labels.push(name);
+    values.push(percent);
+
+    totalDone += done;
+    totalBosses += boxes.length;
+  });
+
+  labels.push('Gesamt');
+  values.push(Math.round((totalDone / totalBosses) * 100));
+
+  const ctx = document.getElementById('statsChart');
+
+  if (chartInstance) chartInstance.destroy();
+
+  chartInstance = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels,
+      datasets: [{
+        label: 'Fortschritt in %',
+        data: values
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true,
+          max: 100,
+          ticks: {
+            callback: v => v + '%'
+          }
+        }
+      }
+    }
+  });
+}
+
 
   // --- Checkbox Eventlistener ---
   checkboxes.forEach(cb => {
