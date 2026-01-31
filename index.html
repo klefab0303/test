@@ -152,6 +152,8 @@
 <h1>Elden Ring Boss-Checkliste</h1>
 
 <input type="text" id="search" placeholder="Nach Boss oder Region filtern..." aria-label="Suche Boss oder Region">
+<button id="showStats" style="margin:10px 0; padding:8px 12px;">Statistik anzeigen</button>
+<canvas id="progressChart" style="max-width:100%; display:none; margin-bottom:30px;"></canvas>
 
     <section class="region">
       <button class="accordion">Limgrave</button>
@@ -1592,6 +1594,93 @@ document.addEventListener('DOMContentLoaded', () => {
   updateProgressText();
   updateRegionProgress();
 
+});
+// --- Statistik-Balkendiagramm ---
+const statsButton = document.getElementById('showStats');
+const chartCanvas = document.getElementById('progressChart');
+let progressChart; // Referenz auf das Chart
+
+function computeRegionPercentages() {
+  const regions = document.querySelectorAll('.region');
+  const labels = [];
+  const percentages = [];
+
+  regions.forEach(region => {
+    const regionName = region.querySelector('.accordion').textContent;
+    const checkboxes = region.querySelectorAll('.boss-table tbody input[type="checkbox"]');
+    const total = checkboxes.length;
+    const done = region.querySelectorAll('.boss-table tbody input[type="checkbox"]:checked').length;
+    const percent = total ? Math.round((done / total) * 100) : 0;
+
+    labels.push(regionName);
+    percentages.push(percent);
+  });
+
+  // Gesamtfortschritt
+  const allCheckboxes = document.querySelectorAll('.boss-table tbody input[type="checkbox"]');
+  const totalAll = allCheckboxes.length;
+  const doneAll = document.querySelectorAll('.boss-table tbody input[type="checkbox"]:checked').length;
+  labels.push('Gesamt');
+  percentages.push(totalAll ? Math.round((doneAll / totalAll) * 100) : 0);
+
+  return { labels, percentages };
+}
+
+statsButton.addEventListener('click', () => {
+  const { labels, percentages } = computeRegionPercentages();
+
+  chartCanvas.style.display = 'block'; // Canvas sichtbar machen
+
+  if (progressChart) {
+    progressChart.destroy(); // altes Chart löschen
+  }
+
+  progressChart = new Chart(chartCanvas, {
+    type: 'bar',
+    data: {
+      labels: labels,
+      datasets: [{
+        label: 'Boss-Fortschritt in %',
+        data: percentages,
+        backgroundColor: 'rgba(54, 162, 235, 0.6)',
+        borderColor: 'rgba(54, 162, 235, 1)',
+        borderWidth: 1
+      }]
+    },
+    options: {
+      responsive: true,
+      scales: {
+        y: {
+          beginAtZero: true,
+          max: 100,
+          ticks: {
+            stepSize: 10,
+            callback: value => value + '%'
+          },
+          title: {
+            display: true,
+            text: 'Fortschritt in %'
+          }
+        },
+        x: {
+          ticks: {
+            autoSkip: false,
+            maxRotation: 90,
+            minRotation: 45,
+            font: { size: 10 } // kleine Schrift bei vielen Regionen
+          }
+        }
+      },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: ctx => ctx.parsed.y + '%'
+          }
+        }
+      }
+    }
+  });
 });
 
 </script>
