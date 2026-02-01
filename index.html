@@ -121,6 +121,10 @@
 }
   /* Statistik-Modal */
 .modal {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  inset: 0;
   background: rgba(5, 5, 8, 0.85);
 }
 
@@ -128,14 +132,27 @@
   background: linear-gradient(#1a1a1f, #0f0f14);
   border: 1px solid var(--er-gold);
   color: var(--er-text);
+  max-width: 900px;
+  width: 90%;
+  margin: 5% auto;
+  padding: 20px;
+  border-radius: 10px;
+  position: relative;
 }
 
 .modal-content h2 {
   color: var(--er-gold-soft);
+    margin-top: 0;
+  text-align: center;
 }
 
 .close {
   color: var(--er-gold-soft);
+    position: absolute;
+  right: 15px;
+  top: 10px;
+  font-size: 26px;
+  cursor: pointer;
 }
 
 .close:hover {
