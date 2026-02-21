@@ -133,7 +133,8 @@ tr:hover td { background: #fafcff; }
 .badge-nein { background: #fdecea; color: var(--danger); padding: 3px 10px; border-radius: 20px; font-size: 0.78rem; font-weight: 700; }
 .badge-inaktiv { background: #f0f0f0; color: #888; padding: 3px 10px; border-radius: 20px; font-size: 0.78rem; font-weight: 700; }
 .badge-einzel { background: #e8f4fd; color: #005f9e; padding: 3px 10px; border-radius: 20px; font-size: 0.78rem; font-weight: 700; }
-.badge-mannschaft { background: #fef3e2; color: #d35400; padding: 3px 10px; border-radius: 20px; font-size: 0.78rem; font-weight: 700; }
+.badge-mannschaft { background: #fef3e2; color: #d35400; padding: 3px 10px; border-radius: 20px; font-size: 0.78rem; font-weight: 700; display: inline-block; }
+
 
 /* ─── STATS ─── */
 .stats-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1rem; margin-bottom: 1.5rem; }
