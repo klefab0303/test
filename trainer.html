@@ -127,7 +127,7 @@ let allDisciplines = [];
   const [swRes, trRes, diRes] = await Promise.all([
     db.from('swimmers').select('id,name,year,user_id').order('name'),
     db.from('trainings').select('id,date,start_time,end_time').order('date'),
-    db.from('disciplines').select('id,name,type,description,team_size').order('name'),
+    db.from('disciplines').select('id,name,type,description').order('name'),
   ]);
   allSwimmers = swRes.data || [];
   allTrainings = trRes.data || [];
