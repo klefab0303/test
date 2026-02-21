@@ -193,3 +193,88 @@ tr:hover td { background: #fafcff; }
   th, td { padding: 8px; }
   .form-row { flex-direction: column; }
 }
+
+/* ─── STAFFEL-POSITIONEN ─── */
+.relay-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.8rem;
+  margin: 0.8rem 0;
+}
+.relay-slot {
+  background: var(--secondary);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.8rem;
+}
+.relay-slot label {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--primary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.4rem;
+}
+.relay-slot select {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1.5px solid var(--border);
+  border-radius: 6px;
+  font-size: 0.88rem;
+  font-family: var(--font);
+  background: white;
+}
+
+/* ─── ZUORDNUNGS-PANEL (hübscher) ─── */
+.assign-panel {
+  background: linear-gradient(135deg, #f8fbff 0%, #eef4fa 100%);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.2rem;
+  margin-top: 0.5rem;
+}
+.assign-panel .checkbox-list label {
+  background: white;
+  border: 1px solid var(--border);
+  transition: all 0.15s;
+}
+.assign-panel .checkbox-list label:hover {
+  border-color: var(--primary);
+  background: #e8f4fd;
+}
+
+/* ─── CARD HEADER VERBESSERUNG ─── */
+.card h2 {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* ─── DISC-ITEM VERBESSERUNG ─── */
+.disc-item {
+  transition: box-shadow 0.2s;
+}
+.disc-item:hover {
+  box-shadow: 0 2px 8px rgba(0, 95, 158, 0.1);
+}
+
+/* ─── STAFFEL-BADGE ─── */
+.badge-staffel {
+  background: #fef3e2;
+  color: #d35400;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+/* ─── POSITION-BADGE (Schwimmer-Ansicht) ─── */
+.badge-position {
+  background: #e8f4fd;
+  color: var(--primary);
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
