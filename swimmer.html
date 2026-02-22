@@ -138,54 +138,58 @@ async function saveAtt(trainingId, btn) {
 
 // ─── DISZIPLINEN (getrennt) ────────────────────────────────
 async function loadDisciplines(type) {
-  const { data } = await db
-    .from('swimmer_disciplines')
-    .select('discipline_id, disciplines(name, type, description)')
-    .eq('swimmer_id', swimmerId);
-
-  const filtered = (data || []).filter(d => d.disciplines.type === type);
   const container = document.getElementById(type + '-list');
 
-  if (filtered.length === 0) {
-    container.innerHTML = '<p style="color:var(--text-light)">Keine ' + (type === 'einzel' ? 'Einzeldisziplinen' : 'Staffeldisziplinen') + ' zugewiesen.</p>';
-    return;
-  }
+  if (type === 'einzel') {
+    const { data } = await db
+      .from('swimmer_disciplines')
+      .select('discipline_id, disciplines(name, description)')
+      .eq('swimmer_id', swimmerId);
 
-  // Für Staffeln: eigene Position laden
-  let posMap = {};
-  if (type === 'mannschaft') {
-    const discIds = filtered.map(d => d.discipline_id);
+    const filtered = (data || []);
+    if (filtered.length === 0) {
+      container.innerHTML = '<p style="color:var(--text-light)">Keine Einzeldisziplinen zugewiesen.</p>';
+      return;
+    }
+    let html = '';
+    filtered.forEach(d => {
+      html += `<div class="disc-item">
+        <div class="disc-item-header" onclick="toggleDisc(this)">
+          <span><strong>${d.disciplines.name}</strong></span>
+          <span style="font-size:0.8rem;color:var(--text-light)">▼</span>
+        </div>
+        <div class="disc-item-body">${d.disciplines.description || 'Keine Beschreibung.'}</div>
+      </div>`;
+    });
+    container.innerHTML = html;
+
+  } else {
+    // Mannschaft: Staffeln laden, in denen dieser Schwimmer eingeteilt ist
     const { data: positions } = await db
       .from('relay_positions')
-      .select('discipline_id,swimmer_id,position')
-      .in('discipline_id', discIds);
-    (positions || []).forEach(p => {
-      if (!posMap[p.discipline_id]) posMap[p.discipline_id] = {};
-      posMap[p.discipline_id][p.swimmer_id] = p.position;
-    });
-  }
+      .select('position, staffel_id, staffeln(id, discipline_id, disciplines(name))')
+      .eq('swimmer_id', swimmerId);
 
-  let html = '';
-  filtered.forEach(d => {
-    const disc = d.disciplines;
-    let posInfo = '';
-    if (type === 'mannschaft') {
-      const myPos = posMap[d.discipline_id] && posMap[d.discipline_id][swimmerId];
-      posInfo = myPos ? ` <span class="badge-position">${myPos}. Teilstrecke</span>` : ' <span class="badge-position">Position offen</span>';
+    if (!positions || positions.length === 0) {
+      container.innerHTML = '<p style="color:var(--text-light)">Keiner Staffel zugewiesen.</p>';
+      return;
     }
 
-    html += `<div class="disc-item">
-      <div class="disc-item-header" onclick="toggleDisc(this)">
-        <span><strong>${disc.name}</strong>
-          ${type === 'mannschaft' ? '<span class="badge-staffel">4er-Staffel</span>' + posInfo : ''}
-        </span>
-        <span style="font-size:0.8rem;color:var(--text-light)">▼</span>
-      </div>
-      <div class="disc-item-body">${disc.description || 'Keine Beschreibung.'}</div>
-    </div>`;
-  });
-  container.innerHTML = html;
+    let html = '';
+    positions.forEach(p => {
+      const discName = p.staffeln.disciplines.name;
+      html += `<div class="disc-item">
+        <div class="disc-item-header">
+          <span><strong>${discName}</strong>
+            <span class="badge-mannschaft">${p.position}. Teilstrecke</span>
+          </span>
+        </div>
+      </div>`;
+    });
+    container.innerHTML = html;
+  }
 }
+
 
 
 // ─── ZEITEN (getrennt nach Typ) ────────────────────────────
