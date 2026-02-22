@@ -319,3 +319,18 @@ tr:hover td { background: #fafcff; }
   border-color: var(--primary);
   box-shadow: 0 0 0 3px rgba(0, 95, 158, 0.1);
 }
+/* ─── STAFFEL-ÜBERSICHT (Schwimmer-Ansicht) ─── */
+.staffel-overview {
+  display: flex; flex-direction: column; gap: 0.4rem;
+}
+.staffel-member {
+  display: flex; align-items: center; gap: 0.6rem;
+  padding: 0.5rem 0.8rem; border-radius: 6px;
+  background: var(--secondary); font-size: 0.9rem;
+}
+.staffel-member.is-me {
+  background: var(--primary); color: white; font-weight: 600;
+}
+.member-pos {
+  font-weight: 700; min-width: 1.5rem;
+}
